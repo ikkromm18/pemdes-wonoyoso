@@ -1,11 +1,17 @@
 <?php
 
+use App\Http\Controllers\BerandaController;
+use App\Http\Controllers\LayananController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('index');
-});
+// Route::get('/', function () {
+//     return view('index');
+// });
+
+Route::get('/', [BerandaController::class, 'index'])->name('home');
+Route::get('/layanan', [LayananController::class, 'index'])->name('layanan');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
