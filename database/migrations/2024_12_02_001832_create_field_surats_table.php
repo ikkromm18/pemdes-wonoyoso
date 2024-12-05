@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('field_surats', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('jenis_surats_id')->constrained('jenis_surats')->onDelete('cascade');
-            $table->string('nama_field'); // Nama atribut (misalnya: Nama, Alamat)
-            $table->enum('tipe_field', ['text', 'number', 'date', 'textarea', 'select', 'radio', 'checkbox']);
-            $table->boolean('is_required')->default(true); // Apakah atribut ini wajib diisi
+            $table->foreignId('jenis_surat_id')->constrained('jenis_surats')->onDelete('cascade');
+            $table->string('nama_field', 100);
+            $table->enum('tipe_field', ['text', 'number', 'date', 'time', 'boolean', 'email'])->default('text');
+            $table->boolean('is_required')->default(true);
             $table->timestamps();
         });
     }

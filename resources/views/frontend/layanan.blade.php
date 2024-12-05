@@ -9,7 +9,7 @@
                 <h1 class="text-center font-semibold text-2xl mb-8">Form Pengajuan Surat</h1>
 
 
-                <form class="max-w-xl mx-auto" action="">
+                <form class="max-w-xl mx-auto" action="{{ route('pengajuan.store') }}">
                     @csrf
                     <div class="relative z-0 w-full mb-5 group">
                         <input type="email" name="email" id="email"
@@ -54,26 +54,11 @@
                         <select id="jenis_surat"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option selected>Pilih Jenis Surat</option>
-                            <option value="1">Surat Keterangan Meninggal Dunia</option>
-                            <option value="2">Surat Keterangan Domisili Penduduk</option>
-                            <option value="3">Surat Keterangan Tidak Mampu</option>
-                            <option value="4">Surat Keterangan Usaha</option>
-                            <option value="5">Surat Keterangan Ahli Waris</option>
-                            <option value="6">Surat Pengantar KTP</option>
-                            <option value="7">Surat Biodata Penduduk</option>
-                            <option value="8">Surat Keterangan Pindah Penduduk</option>
-                            <option value="9">Surat Pengantar Izin Keramaian</option>
-                            <option value="10">Surat Pengantar Laporan Kehilangan</option>
-                            <option value="11">Surat Keterangan Domisili Usaha</option>
-                            <option value="12">Surat Keterangan Jamkesos</option>
-                            <option value="13">Surat Permohonan Akta Lahir </option>
-                            <option value="14">Surat Pernyataan Belum Memiliki Akta Lahir</option>
-                            <option value="15">Surat Keterangan Domisili Kantor</option>
-                            <option value="16">Surat Pengantar IMB</option>
-                            <option value="17">Surat SITU / SIUP</option>
-                            <option value="18">Surat Keterangan Kelahiran</option>
-                            <option value="19">Surat Pengantar Umum</option>
-                            <option value="20">Surat Keterangan Penghasilan Orang Tua</option>
+
+                            @foreach ($jenissurats as $js)
+                                <option value="{{ $js->id }}">{{ $js->nama_jenis }}</option>
+                            @endforeach
+
                         </select>
                     </div>
 
@@ -131,8 +116,76 @@
         </div>
     </div>
 
-
     <script>
+        document.getElementById('jenis_surat').addEventListener('change', function() {
+            const jenisSuratId = this.value;
+            const inputDinamis = document.getElementById('input_dinamis');
+            inputDinamis.innerHTML = '';
+
+            if (jenisSuratId) {
+                fetch(`/api/fields/${jenisSuratId}`)
+                    .then(response => response.json())
+                    .then(fields => {
+                        fields.forEach(field => {
+
+
+
+                            const formGroup = document.createElement('div');
+                            formGroup.classList.add('relative', 'z-0', 'w-full', 'mb-5', 'group');
+
+                            const inputLabel = document.createElement('label');
+                            inputLabel.classList.add('peer-focus:font-medium', 'absolute', 'text-sm',
+                                'text-gray-500', 'duration-300', 'transform', '-translate-y-6',
+                                'scale-75', 'top-3', '-z-10', 'origin-[0]',
+                                'peer-focus:text-blue-600', 'peer-placeholder-shown:scale-100',
+                                'peer-placeholder-shown:translate-y-0', 'peer-focus:scale-75',
+                                'peer-focus:-translate-y-6');
+                            inputLabel.textContent = field.nama_field;
+
+                            let inputElement;
+
+                            if (field.tipe_field === 'boolean') {
+                                // Dropdown untuk tipe boolean
+                                inputElement = document.createElement('select');
+                                inputElement.classList.add('block', 'w-full', 'py-2.5', 'px-0',
+                                    'text-sm', 'text-gray-900', 'bg-transparent', 'border-0',
+                                    'border-b-2', 'border-gray-300', 'appearance-none',
+                                    'focus:outline-none', 'focus:ring-0', 'focus:border-blue-600',
+                                    'peer');
+                                inputElement.name = `fields[${field.id}]`;
+                                inputElement.innerHTML = `
+                                <option value="1">Ya</option>
+                                <option value="0">Tidak</option>
+                            `;
+                            } else {
+                                // Input teks untuk tipe lain
+                                inputElement = document.createElement('input');
+                                inputElement.type = field.tipe_field;
+                                inputElement.classList.add('block', 'py-2.5', 'px-0', 'w-full',
+                                    'text-sm', 'text-gray-900', 'bg-transparent', 'border-0',
+                                    'border-b-2', 'border-gray-300', 'appearance-none',
+                                    'focus:outline-none', 'focus:ring-0', 'focus:border-blue-600',
+                                    'peer');
+                                inputElement.name = `fields[${field.id}]`;
+                            }
+
+                            inputElement.required = field.is_required;
+
+
+                            // Tambahkan elemen ke dalam grup
+                            formGroup.appendChild(inputElement);
+                            formGroup.appendChild(inputLabel);
+
+
+                            // Tambahkan grup ke dalam container input dinamis
+                            inputDinamis.appendChild(formGroup);
+                        });
+                    });
+            }
+        })
+    </script>
+
+    {{-- <script>
         document.getElementById('jenis_surat').addEventListener('change', function() {
             const dynamicInputs = document.getElementById('input_dinamis');
             dynamicInputs.innerHTML = '';
@@ -300,6 +353,6 @@
                     break;
             }
         })
-    </script>
+    </script> --}}
 
 @endsection

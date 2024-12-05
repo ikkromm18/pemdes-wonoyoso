@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('data_pengajuans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pengajuan_id')->constrained('pengajuan_surats')->onDelete('cascade'); // Referensi ke pengajuan
-            $table->foreignId('field_id')->constrained('field_surats')->onDelete('cascade'); // Referensi ke field
-            $table->text('value'); // Nilai yang diisi oleh pengguna
+            $table->foreignId('pengajuan_id')->constrained('pengajuan_surats')->onDelete('cascade');
+            $table->foreignId('field_id')->constrained('field_surats')->onDelete('cascade');
+            $table->text('nilai');
             $table->timestamps();
         });
     }
