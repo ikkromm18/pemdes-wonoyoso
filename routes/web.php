@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\BerandaController;
+use App\Http\Controllers\DataPengajuanController;
 use App\Http\Controllers\FieldSuratController;
 use App\Http\Controllers\JenisSuratController;
 use App\Http\Controllers\LayananController;
@@ -17,6 +18,8 @@ Route::post('/pengajuan', [PengajuanSuratController::class, 'store'])->name('pen
 
 
 Route::get('/api/fields/{jenisSuratsId}', [LayananController::class, 'getFieldSurats']);
+
+
 
 
 
@@ -36,6 +39,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/field', [FieldSuratController::class, 'index'])->name('field');
 
     Route::get('/jenissurat', [JenisSuratController::class, 'index'])->name('jenissurat');
+
+    Route::get('/pengajuan', [PengajuanSuratController::class, 'index'])->name('pengajuansurat');
+    Route::get('/pengajuan/{id}', [PengajuanSuratController::class, 'show'])->name('pengajuan.show');
+
+    Route::get('/pengajuan/{id}/cetak', [PengajuanSuratController::class, 'cetak'])->name('pengajuan.cetak');
+
+    Route::get('/datapengajuan', [DataPengajuanController::class, 'index'])->name('datapengajuan');
 });
 
 require __DIR__ . '/auth.php';

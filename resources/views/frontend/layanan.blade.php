@@ -9,7 +9,7 @@
                 <h1 class="text-center font-semibold text-2xl mb-8">Form Pengajuan Surat</h1>
 
 
-                <form class="max-w-xl mx-auto" action="{{ route('pengajuan.store') }}">
+                <form class="max-w-xl mx-auto" action="{{ route('pengajuan.store') }}" method="POST">
                     @csrf
                     <div class="relative z-0 w-full mb-5 group">
                         <input type="email" name="email" id="email"
@@ -51,10 +51,9 @@
 
                         <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis
                             Surat</label>
-                        <select id="jenis_surat"
+                        <select id="jenis_surat_id" name="jenis_surat_id"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option selected>Pilih Jenis Surat</option>
-
                             @foreach ($jenissurats as $js)
                                 <option value="{{ $js->id }}">{{ $js->nama_jenis }}</option>
                             @endforeach
@@ -117,7 +116,7 @@
     </div>
 
     <script>
-        document.getElementById('jenis_surat').addEventListener('change', function() {
+        document.getElementById('jenis_surat_id').addEventListener('change', function() {
             const jenisSuratId = this.value;
             const inputDinamis = document.getElementById('input_dinamis');
             inputDinamis.innerHTML = '';

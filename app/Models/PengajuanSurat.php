@@ -14,6 +14,7 @@ class PengajuanSurat extends Model
         'nik',
         'nama',
         'email',
+        'alamat',
         'jenis_surat_id',
         'status'
     ];

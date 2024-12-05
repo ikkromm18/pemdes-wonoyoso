@@ -21,12 +21,6 @@
     @include('components.footer')
 
 
-
-
-
-
-
-
     @RegisterServiceWorkerScript
 </body>
 
