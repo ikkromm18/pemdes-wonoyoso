@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\BerandaController;
+use App\Http\Controllers\FieldSuratController;
+use App\Http\Controllers\JenisSuratController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\PengajuanSuratController;
 use App\Http\Controllers\ProfileController;
@@ -31,7 +33,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/home', [AuthenticatedSessionController::class, 'store'])->name('admin.home');
+    Route::get('/field', [FieldSuratController::class, 'index'])->name('field');
+
+    Route::get('/jenissurat', [JenisSuratController::class, 'index'])->name('jenissurat');
 });
 
 require __DIR__ . '/auth.php';
