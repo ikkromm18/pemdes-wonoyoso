@@ -9,29 +9,48 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'install-button' => true,
+    'install-button' => false,
 
     /*
     |--------------------------------------------------------------------------
     | PWA Manifest Configuration
     |--------------------------------------------------------------------------
-    |  php artisan erag:pwa-update-manifest
+    |  php artisan erag=>pwa-update-manifest
     */
 
     'manifest' => [
-        'name' => 'Laravel PWA',
-        'short_name' => 'LPT',
-        'background_color' => '#6777ef',
-        'display' => 'fullscreen',
-        'description' => 'A Progressive Web Application setup for Laravel projects.',
-        'theme_color' => '#6777ef',
-        'icons' => [
+        "name" => "Pemdes Wonoyoso",
+        "short_name" => "Pemdes Wonoyoso",
+        "theme_color" => "#0023D2",
+        "background_color" => "#0023D2",
+        "display" => "fullScreen",
+        "orientation" => "portrait",
+        "scope" => "/",
+        "start_url" => "/",
+        "icons" => [
             [
-                'src' => 'logo.png',
-                'sizes' => '512x512',
-                'type' => 'image/png',
+                "src" => "images/icons/icon-72x72.png",
+                "sizes" => "72x72",
+                "type" => "image/png"
             ],
-        ],
+            [
+                "src" => "images/icons/icon-96x96.png",
+                "sizes" => "96x96",
+                "type" => "image/png"
+            ],
+            [
+                "src" => "images/icons/icon-128x128.png",
+                "sizes" => "128x128",
+                "type" => "image/png"
+            ],
+
+
+            [
+                "src" => "images/icons/icon-512x512.png",
+                "sizes" => "512x512",
+                "type" => "image/png"
+            ]
+        ]
     ],
 
     /*
