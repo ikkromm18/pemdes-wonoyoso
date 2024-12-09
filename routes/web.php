@@ -8,6 +8,8 @@ use App\Http\Controllers\JenisSuratController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\PengajuanSuratController;
 use App\Http\Controllers\ProfileController;
+use App\Mail\PengajuanDiajukanMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 
@@ -27,9 +29,16 @@ Route::get('/dashboard', function () {
     return view('backend.home');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Route::get('/admin', function () {
-//     return view('layouts.admin');
-// })->middleware(['auth', 'verified'])->name('admin');
+Route::get('/send-email', function () {
+    $data = [
+        'name' => 'Syahrizal As',
+        'body' => 'Testing Kirim Email di Santri Koding'
+    ];
+
+    Mail::to('emailtujuan@gmail.com')->send(new PengajuanDiajukanMail($data));
+
+    dd("Email Berhasil dikirim.");
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

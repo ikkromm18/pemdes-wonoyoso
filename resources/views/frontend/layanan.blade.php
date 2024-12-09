@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="max-w-screen-xl mx-auto min-h-screen">
-
+        @include('components.alert')
         <div class="flex">
             <div class="bg-white shadow-lg w-full mt-16 rounded-sm p-8">
                 <h1 class="text-center font-semibold text-2xl mb-8">Form Pengajuan Surat</h1>

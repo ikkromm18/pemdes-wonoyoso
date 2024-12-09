@@ -2,15 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PengajuanDiajukanMail;
 use App\Models\DataPengajuan;
 use App\Models\PengajuanSurat;
 use App\Models\FieldSurat;
+use App\Notifications\NewPengajuan;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class PengajuanSuratController extends Controller
 {
+
+    public $nik = '';
+    public $nama = '';
+    public $email = '';
+
 
     public function index()
     {
@@ -75,6 +83,8 @@ class PengajuanSuratController extends Controller
             'status' => 'pending',
         ]);
 
+
+
         foreach ($request->fields as $fieldId => $value) {
             DataPengajuan::create([
                 'pengajuan_id' => $pengajuan->id,
@@ -82,6 +92,10 @@ class PengajuanSuratController extends Controller
                 'nilai' => $value,
             ]);
         }
+
+
+        // Mail::to($pengajuan->email)->send(new PengajuanDiajukanMail($pengajuan));
+
         return redirect()->route('layanan')->with('success', 'Pengajuan berhasil diajukan!');
     }
 
