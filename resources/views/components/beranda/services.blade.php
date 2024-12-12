@@ -4,10 +4,11 @@
         <h1 class="text-center font-semibold text-4xl mb-16 text-white"></h1>
         <div class="flex flex-col md:flex-row items-center gap-4 md:gap-0 md:">
             <div class="">
-                <img src="../images/animasi1.png" alt="" srcset="">
+                <img src="../images/animasi1.png">
             </div>
             <div class="flex flex-col ml-0 md:ml-10">
-                <h1 class="font-bold text-3xl text-center md:text-left">Tatacara <span class="text-[#E16741]">
+                <h1 class="font-bold text-3xl md:text-5xl md:mb-4 text-center md:text-left">Tatacara <span
+                        class="text-[#E16741]">
                         Pengajuan</span></h1>
 
 
