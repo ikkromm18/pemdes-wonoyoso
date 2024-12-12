@@ -1,4 +1,4 @@
-<div class="bg-[#ffdcd2]">
+<div id="tatacara" class="bg-[#ffdcd2]">
 
     <div class="max-w-screen-xl mx-auto pt-2 md:pt-20 pb-20 md:px-16 px-6">
         <h1 class="text-center font-semibold text-4xl mb-16 text-white"></h1>
@@ -13,7 +13,7 @@
 
 
                 <div class="flex flex-col gap-4">
-                    <div class="flex gap-4 items-center rounded-lg p-4 shadow-md">
+                    <div class="flex gap-4 items-center rounded-lg p-4 shadow-md hover:shadow-lg">
                         <h2
                             class="bg-[#E16741] rounded-s-full md:rounded-full w-10 h-10 flex justify-center items-center font-semibold">
                             1
@@ -24,7 +24,7 @@
                         </div>
                     </div>
 
-                    <div class="flex gap-4 items-center rounded-lg p-4 shadow-md">
+                    <div class="flex gap-4 items-center rounded-lg p-4 shadow-md hover:shadow-lg">
                         <h2
                             class="bg-[#E16741] rounded-s-full md:rounded-full w-10 h-10 flex justify-center items-center font-semibold">
                             2
@@ -35,7 +35,7 @@
                         </div>
                     </div>
 
-                    <div class="flex gap-4 items-center rounded-lg p-4 shadow-md">
+                    <div class="flex gap-4 items-center rounded-lg p-4 shadow-md hover:shadow-lg">
                         <h2
                             class="bg-[#E16741] rounded-s-full md:rounded-full w-10 h-10 flex justify-center items-center font-semibold">
                             3
@@ -46,7 +46,7 @@
                         </div>
                     </div>
 
-                    <div class="flex gap-4 items-center rounded-lg p-4 shadow-md">
+                    <div class="flex gap-4 items-center rounded-lg p-4 shadow-md hover:shadow-lg">
                         <h2
                             class="bg-[#E16741] rounded-s-full md:rounded-full w-10 h-10 flex justify-center items-center font-semibold">
                             4
@@ -59,11 +59,6 @@
 
 
                 </div>
-
-
-
-
-
 
             </div>
 

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('foto_ktp')->nullable();
             $table->string('foto_kk')->nullable();
-            $table->integer('nik')->nullable();
+            $table->string('nik')->nullable();
             $table->string('alamat')->nullable();
             $table->enum('role', ['User', 'Admin'])->default('User');
             $table->rememberToken();

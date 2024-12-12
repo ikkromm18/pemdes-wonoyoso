@@ -1,4 +1,4 @@
-<div class="max-w-screen-xl mx-auto">
+<div class="max-w-screen-xl mx-auto" id="sambutan">
     <div class="hero py-10 px-8 md:py-20 md:px-16">
         <div class="hero-content flex-col lg:flex-row-reverse shadow-xl p-4">
             <img src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"

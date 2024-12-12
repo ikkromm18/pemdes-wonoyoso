@@ -1,11 +1,12 @@
 <section>
+    @include('components.alert')
     <header>
         <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Profile Information') }}
+            {{ __('Informasi Pribadi') }}
         </h2>
 
         <p class="mt-1 text-sm text-gray-600">
-            {{ __("Update your account's profile information and email address.") }}
+            {{ __('lengkapi Profil Anda untuk melakukan pengajuan pembuatan administrasi') }}
         </p>
     </header>
 
@@ -54,29 +55,45 @@
         <div>
             <x-input-label for="alamat" :value="__('Alamat')" />
             <x-text-input id="alamat" alamat="alamat" type="text" class="mt-1 block w-full" :value="old('alamat', $user->alamat)"
-                required autofocus autocomplete="alamat" />
+                required autofocus autocomplete="alamat" name="alamat" />
             <x-input-error class="mt-2" :messages="$errors->get('alamat')" />
         </div>
 
         <div>
             <x-input-label for="nik" :value="__('Nomor NIK')" />
             <x-text-input id="nik" nik="nik" type="number" class="mt-1 block w-full" :value="old('nik', $user->nik)"
-                required autofocus autocomplete="nik" />
+                required autofocus autocomplete="nik" name="nik" />
             <x-input-error class="mt-2" :messages="$errors->get('nik')" />
         </div>
 
         <div>
             <x-input-label for="foto_ktp" :value="__('Foto KTP')" />
-            <x-text-input id="foto_ktp" foto_ktp="foto_ktp" type="file" class="mt-1 block w-full" :value="old('foto_ktp', $user->foto_ktp)"
-                required autofocus autocomplete="foto_ktp" />
+            <x-text-input id="foto_ktp" foto_ktp="foto_ktp" type="file" class="mt-1 block w-full" name="foto_ktp" />
             <x-input-error class="mt-2" :messages="$errors->get('foto_ktp')" />
+
+            <!-- Area Default Dropzone -->
+            <div id="default-dropzone1" class="mt-2 text-sm text-gray-500 {{ $user->foto_ktp ? 'hidden' : '' }}">
+                {{ __('Upload Foto KTP untuk melihat preview.') }}
+            </div>
+
+            <!-- Area Preview -->
+            <img id="image-preview1" src="{{ $user->foto_ktp ? asset($user->foto_ktp) : '#' }}" alt="Preview Foto KTP"
+                class="mt-2 {{ $user->foto_ktp ? '' : 'hidden' }} w-32 rounded" />
         </div>
 
         <div>
             <x-input-label for="foto_kk" :value="__('Foto KK')" />
-            <x-text-input id="foto_kk" foto_kk="foto_kk" type="file" class="mt-1 block w-full" :value="old('foto_kk', $user->foto_kk)"
-                required autofocus autocomplete="foto_kk" />
+            <x-text-input id="foto_kk" foto_kk="foto_kk" type="file" class="mt-1 block w-full" name="foto_kk" />
             <x-input-error class="mt-2" :messages="$errors->get('foto_kk')" />
+
+            <!-- Area Default Dropzone -->
+            <div id="default-dropzone2" class="mt-2 text-sm text-gray-500 {{ $user->foto_kk ? 'hidden' : '' }}">
+                {{ __('Upload Foto KK untuk melihat preview.') }}
+            </div>
+
+            <!-- Area Preview -->
+            <img id="image-preview2" src="{{ $user->foto_kk ? asset($user->foto_kk) : '#' }}" alt="Preview Foto KK"
+                class="mt-2 {{ $user->foto_kk ? '' : 'hidden' }} w-32 rounded" />
         </div>
 
 
@@ -90,3 +107,28 @@
         </div>
     </form>
 </section>
+
+<script>
+    function previewImage(inputId, previewId, dropzoneId) {
+        const input = document.getElementById(inputId);
+        const preview = document.getElementById(previewId);
+        const dropzone = document.getElementById(dropzoneId);
+
+        input.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.classList.remove('hidden');
+                    dropzone.classList.add('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+
+    // Initialize preview functions for Foto KTP and Foto KK
+    previewImage('foto_ktp', 'image-preview1', 'default-dropzone1');
+    previewImage('foto_kk', 'image-preview2', 'default-dropzone2');
+</script>

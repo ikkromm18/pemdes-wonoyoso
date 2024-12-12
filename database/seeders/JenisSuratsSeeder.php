@@ -17,9 +17,7 @@ class JenisSuratsSeeder extends Seeder
             [
                 'nama_jenis' => 'Surat Keterangan Meninggal Dunia',
             ],
-            // [
-            //     'nama_jenis' => 'Surat Keterangan Domisili Penduduk',
-            // ],
+
             [
                 'nama_jenis' => 'Surat Keterangan Kepala Desa',
             ],
@@ -32,6 +30,9 @@ class JenisSuratsSeeder extends Seeder
             [
                 'nama_jenis' => 'Surat Pengantar Umum',
             ],
+            // [
+            //     'nama_jenis' => 'Surat Keterangan Domisili Penduduk',
+            // ],
             // [
             //     'nama_jenis' => 'Surat Keterangan Usaha',
             // ],

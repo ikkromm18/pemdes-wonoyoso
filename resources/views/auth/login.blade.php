@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Layanan')
+@section('title', 'login')
 @section('content')
     <div class="flex items-center justify-center pt-8">
         <!-- Session Status -->
