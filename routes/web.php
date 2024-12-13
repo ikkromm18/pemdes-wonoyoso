@@ -15,17 +15,13 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [BerandaController::class, 'index'])->name('home');
-Route::get('/layanan', [LayananController::class, 'index'])->name('layanan');
-Route::post('/pengajuan', [PengajuanSuratController::class, 'store'])->name('pengajuan.store');
+Route::get('/test', function () {
+    return view('pdf.pengajuan');
+});
+
 
 
 Route::get('/api/fields/{jenisSuratsId}', [LayananController::class, 'getFieldSurats']);
-
-
-
-
-
-
 
 Route::get('/send-email', function () {
     $data = [
@@ -33,14 +29,19 @@ Route::get('/send-email', function () {
         'body' => 'Testing Kirim Email di Santri Koding'
     ];
 
-    Mail::to('emailtujuan@gmail.com')->send(new PengajuanDiajukanMail($data));
-
+    Mail::to('hadayaa749@gmail.com')->send(new PengajuanDiajukanMail($data));
     dd("Email Berhasil dikirim.");
 });
 
 Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/layanan', [LayananController::class, 'index'])->name('layanan');
+    Route::post('/pengajuan', [PengajuanSuratController::class, 'store'])->name('pengajuan.store');
+});
 
 Route::middleware(['role:Admin'])->group(function () {
     Route::get('/dashboard', function () {
@@ -54,7 +55,12 @@ Route::middleware(['role:Admin'])->group(function () {
     Route::get('/pengajuan', [PengajuanSuratController::class, 'index'])->name('pengajuansurat');
     Route::get('/pengajuan/{id}', [PengajuanSuratController::class, 'show'])->name('pengajuan.show');
 
+    Route::get('/pengajuan/print/{id}', [PengajuanSuratController::class, 'Print'])->name('print');
+
+
     Route::get('/pengajuan/{id}/cetak', [PengajuanSuratController::class, 'cetak'])->name('pengajuan.cetak');
+    Route::patch('/pengajuan/{id}/approve', [PengajuanSuratController::class, 'approve'])->name('pengajuan.approve');
+    Route::patch('/pengajuan/{id}/rejected', [PengajuanSuratController::class, 'rejected'])->name('pengajuan.rejected');
 
     Route::get('/datapengajuan', [DataPengajuanController::class, 'index'])->name('datapengajuan');
 });

@@ -27,9 +27,9 @@
                     <th scope="col" class="px-6 py-3">
                         Jenis Surat
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    {{-- <th scope="col" class="px-6 py-3">
                         Deskripsi
-                    </th>
+                    </th> --}}
 
                     <th scope="col" class="px-6 py-3">
                         Action
@@ -45,11 +45,11 @@
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             {{ $js->nama_jenis }}
                         </th>
-                        <td class="px-6 py-4">
+                        {{-- <td class="px-6 py-4">
                             {{ $js->deskripsi }}
-                        </td>
+                        </td> --}}
 
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4 flex gap-4 md:gap-8">
                             <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                             <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline">hapus</a>
                         </td>

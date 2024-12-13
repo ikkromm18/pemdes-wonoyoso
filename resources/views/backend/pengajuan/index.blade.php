@@ -118,27 +118,31 @@
                                         </div>
                                         <!-- Modal footer -->
                                         <div
-                                            class="flex gap-2 items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                            class="flex flex-wrap gap-2 items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
 
-                                            <a href="#" data-modal-hide="default-modal"
-                                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Setuju</a>
+                                            <a href="#" data-id="{{ $ps->id }}"
+                                                class="btn-approve
+                                                text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
+                                                focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center
+                                                dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Setuju</a>
+
+                                            <a href="{{ route('print', $ps->id) }}"
+                                                class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                Print
+                                            </a>
 
                                             <a href="{{ route('pengajuan.cetak', $ps->id) }}"
                                                 data-modal-hide="default-modal"
-                                                class="text-white bg-yellow-400 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Cetak</a>
+                                                class="text-white bg-yellow-400 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Unduh</a>
 
-                                            <a href="#" data-modal-hide="default-modal"
-                                                class="text-white bg-red-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Tolak</a>
-
-
-                                            {{-- <button data-modal-hide="default-modal" type="button"
-                                                class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Decline</button> --}}
+                                            <a href="#" data-id="{{ $ps->id }}"
+                                                class="btn-rejected text-white bg-red-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Tolak</a>
 
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            {{-- <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline">hapus</a> --}}
+
                         </td>
                     </tr>
                 @endforeach
@@ -188,13 +192,18 @@
                                         <td>:</td>
                                         <td>${data.status}</td>
                                     </tr>
+                                      <tr>
+                                        <td><strong>Foto KTP</strong></td>
+                                        <td>:</td>
+                                        <td><img src="${data.foto_ktp}" class="w-64" alt=""></td>
+                                    </tr>
                                     ${data.details.map(detail => `
-                                                                                                                                        <tr>
-                                                                                                                                            <td><strong>${detail.nama_field}</strong></td>
-                                                                                                                                            <td>:</td>
-                                                                                                                                            <td>${detail.nilai}</td>
-                                                                                                                                        </tr>
-                                                                                                                                    `).join('')}
+                                                                                                                                                                                                                                                                                                    <tr>
+                                                                                                                                                                                                                                                                                                        <td><strong>${detail.nama_field}</strong></td>
+                                                                                                                                                                                                                                                                                                        <td>:</td>
+                                                                                                                                                                                                                                                                                                        <td>${detail.nilai}</td>
+                                                                                                                                                                                                                                                                                                    </tr>
+                                                                                                                                                                                                                                                                                                `).join('')}
                                 </table>
                             `;
                         })
@@ -203,6 +212,54 @@
                             modalBody.innerHTML = '<p>Error fetching data.</p>';
                         });
                 });
+            });
+        });
+    </script>
+    <script>
+        // Fungsi untuk menangani pengajuan (approve/rejected)
+        function handlePengajuan(action, id) {
+            const actionMessage = action === 'approve' ? 'menyetujui' : 'menolak';
+            const confirmMessage = `Apakah Anda yakin ingin ${actionMessage} pengajuan ini?`;
+
+            if (confirm(confirmMessage)) {
+                fetch(`/pengajuan/${id}/${action}`, {
+                        method: 'PATCH',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Content-Type': 'application/json',
+                        },
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert(data.message);
+                            location.reload(); // Reload halaman setelah berhasil
+                        } else {
+                            alert(data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Terjadi kesalahan. Silakan coba lagi.');
+                    });
+            }
+        }
+
+        // Menambahkan event listener untuk tombol approve
+        document.querySelectorAll('.btn-approve').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const id = this.getAttribute('data-id');
+                handlePengajuan('approve', id); // Menangani aksi approve
+            });
+        });
+
+        // Menambahkan event listener untuk tombol reject
+        document.querySelectorAll('.btn-rejected').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const id = this.getAttribute('data-id');
+                handlePengajuan('rejected', id); // Menangani aksi reject
             });
         });
     </script>

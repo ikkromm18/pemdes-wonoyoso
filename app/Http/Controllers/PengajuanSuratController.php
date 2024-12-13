@@ -6,8 +6,10 @@ use App\Mail\PengajuanDiajukanMail;
 use App\Models\DataPengajuan;
 use App\Models\PengajuanSurat;
 use App\Models\FieldSurat;
+use App\Models\User;
 use App\Notifications\NewPengajuan;
 use Barryvdh\DomPDF\Facade\Pdf;
+
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -43,12 +45,15 @@ class PengajuanSuratController extends Controller
         $pengajuan = PengajuanSurat::with('JenisSurats', 'DataPengajuans.FieldSurats')
             ->findOrFail($id);
 
+        $user = User::where('nik', $pengajuan->nik)->first();
+
         return response()->json([
             'id' => $pengajuan->id,
             'nik' => $pengajuan->nik,
             'nama' => $pengajuan->nama,
             'email' => $pengajuan->email,
             'alamat' => $pengajuan->alamat,
+            'foto_ktp' => $user->foto_ktp,
             'jenis_surat' => $pengajuan->JenisSurats->nama_jenis,
             'status' => $pengajuan->status,
             'details' => $pengajuan->DataPengajuans->map(function ($detail) {
@@ -65,20 +70,18 @@ class PengajuanSuratController extends Controller
     {
 
         $request->validate([
-            'nik' => 'required|string|max:16',
-            'nama' => 'required|string',
-            'email' => 'required|email',
-            'alamat' => 'required',
             'jenis_surat_id' => 'required',
             'fields' => 'required|array'
         ]);
-        // Simpan data pengajuan
+
+        $user = auth()->user();
+
 
         $pengajuan = PengajuanSurat::create([
-            'nik' => $request->nik,
-            'nama' => $request->nama,
-            'email' => $request->email,
-            'alamat' => $request->alamat,
+            'nik' => $user->nik,
+            'nama' => $user->name,
+            'email' => $user->email,
+            'alamat' => $user->alamat,
             'jenis_surat_id' => $request->jenis_surat_id,
             'status' => 'pending',
         ]);
@@ -99,12 +102,53 @@ class PengajuanSuratController extends Controller
         return redirect()->route('layanan')->with('success', 'Pengajuan berhasil diajukan!');
     }
 
+
+    public function approve($id)
+    {
+        $pengajuan = PengajuanSurat::findOrFail($id);
+
+
+        $pengajuan->status = 'approved';
+        $pengajuan->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Pengajuan berhasil disetujui.',
+        ]);
+
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Pengajuan tidak dapat disetujui.',
+        ]);
+    }
+
+    public function rejected($id)
+    {
+        $pengajuan = PengajuanSurat::findOrFail($id);
+
+
+        $pengajuan->status = 'rejected';
+        $pengajuan->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Pengajuan ditolak.',
+        ]);
+
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Gagal.',
+        ]);
+    }
+
+
     public function cetak($id)
     {
         $pengajuan = PengajuanSurat::with('JenisSurats', 'DataPengajuans.FieldSurats')
             ->findOrFail($id);
 
-        // Siapkan data untuk PDF
         $data = [
             'id' => $pengajuan->id,
             'nik' => $pengajuan->nik,
@@ -121,10 +165,34 @@ class PengajuanSuratController extends Controller
             }),
         ];
 
-        // Load view PDF
+
         $pdf = Pdf::loadView('pdf.pengajuan', $data);
 
-        // Unduh PDF
+
         return $pdf->download('pengajuan_' . $pengajuan->id . '.pdf');
+    }
+
+    public function Print($id)
+    {
+        $pengajuan = PengajuanSurat::with('JenisSurats', 'DataPengajuans.FieldSurats')
+            ->findOrFail($id);
+
+        $data = [
+            'id' => $pengajuan->id,
+            'nik' => $pengajuan->nik,
+            'nama' => $pengajuan->nama,
+            'email' => $pengajuan->email,
+            'alamat' => $pengajuan->alamat,
+            'jenis_surat' => $pengajuan->JenisSurats->nama_jenis,
+            'status' => $pengajuan->status,
+            'details' => $pengajuan->DataPengajuans->map(function ($detail) {
+                return [
+                    'nama_field' => $detail->fieldSurats->nama_field,
+                    'nilai' => $detail->nilai,
+                ];
+            }),
+        ];
+
+        return view('pdf.pengajuan', $data);
     }
 }

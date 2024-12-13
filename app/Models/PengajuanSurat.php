@@ -29,4 +29,9 @@ class PengajuanSurat extends Model
     {
         return $this->hasMany(DataPengajuan::class, 'pengajuan_id');
     }
+
+    // public function user()
+    // {
+    //     return $this->belongsTo(User::class, 'email', 'email'); // Relasi opsional
+    // }
 }
