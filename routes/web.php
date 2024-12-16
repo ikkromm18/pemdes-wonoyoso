@@ -49,6 +49,12 @@ Route::middleware(['role:Admin'])->group(function () {
     })->middleware(['auth', 'verified'])->name('dashboard');
 
     Route::get('/field', [FieldSuratController::class, 'index'])->name('field');
+    Route::get('/field/create', [FieldSuratController::class, 'create'])->name('field.create');
+    Route::post('/field/store', [FieldSuratController::class, 'store'])->name('field.store');
+    Route::get('/field/edit/{id?}', [FieldSuratController::class, 'edit'])->name('field.edit');
+    Route::put('/field/update/{id?}', [FieldSuratController::class, 'update'])->name('field.update');
+    Route::delete('/field/delete/{id?}', [FieldSuratController::class, 'destroy'])->name('field.delete');
+
 
     Route::get('/jenissurat', [JenisSuratController::class, 'index'])->name('jenissurat');
     Route::get('/jenissurat/create', [JenisSuratController::class, 'create'])->name('jenissurat.create');
