@@ -51,6 +51,12 @@ Route::middleware(['role:Admin'])->group(function () {
     Route::get('/field', [FieldSuratController::class, 'index'])->name('field');
 
     Route::get('/jenissurat', [JenisSuratController::class, 'index'])->name('jenissurat');
+    Route::get('/jenissurat/create', [JenisSuratController::class, 'create'])->name('jenissurat.create');
+    Route::post('/jenissurat/store', [JenisSuratController::class, 'store'])->name('jenissurat.store');
+    Route::get('/jenissurat/edit/{id?}', [JenisSuratController::class, 'edit'])->name('jenissurat.edit');
+    Route::put('/jenissurat/update/{id?}', [JenisSuratController::class, 'update'])->name('jenissurat.update');
+    Route::delete('/jenissurat/delete/{id?}', [JenisSuratController::class, 'destroy'])->name('jenissurat.delete');
+
 
     Route::get('/pengajuan', [PengajuanSuratController::class, 'index'])->name('pengajuansurat');
     Route::get('/pengajuan/{id}', [PengajuanSuratController::class, 'show'])->name('pengajuan.show');

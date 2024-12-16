@@ -10,7 +10,7 @@ class FieldSuratController extends Controller
     public function index()
     {
 
-        $fields = FieldSurat::all();
+        $fields = FieldSurat::paginate(9)->withQueryString();
 
         $data = [
             'field' => $fields

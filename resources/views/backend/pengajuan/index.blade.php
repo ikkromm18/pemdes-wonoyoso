@@ -73,7 +73,8 @@
                             {{ $ps->alamat }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $ps->jenis_surat_id }}
+                            {{ $ps->JenisSurats->nama_jenis }}
+                            {{-- {{ $ps->jenis_surat_id }} --}}
                         </td>
                         <td class="px-6 py-4">
                             {{ $ps->status }}
@@ -198,12 +199,12 @@
                                         <td><img src="${data.foto_ktp}" class="w-64" alt=""></td>
                                     </tr>
                                     ${data.details.map(detail => `
-                                                                                                                                                                                                                                                                                                    <tr>
-                                                                                                                                                                                                                                                                                                        <td><strong>${detail.nama_field}</strong></td>
-                                                                                                                                                                                                                                                                                                        <td>:</td>
-                                                                                                                                                                                                                                                                                                        <td>${detail.nilai}</td>
-                                                                                                                                                                                                                                                                                                    </tr>
-                                                                                                                                                                                                                                                                                                `).join('')}
+                                                                                                                                                                                                                                                                                                                        <tr>
+                                                                                                                                                                                                                                                                                                                            <td><strong>${detail.nama_field}</strong></td>
+                                                                                                                                                                                                                                                                                                                            <td>:</td>
+                                                                                                                                                                                                                                                                                                                            <td>${detail.nilai}</td>
+                                                                                                                                                                                                                                                                                                                        </tr>
+                                                                                                                                                                                                                                                                                                                    `).join('')}
                                 </table>
                             `;
                         })
