@@ -41,12 +41,20 @@ Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.
 Route::middleware(['auth'])->group(function () {
     Route::get('/layanan', [LayananController::class, 'index'])->name('layanan');
     Route::post('/pengajuan', [PengajuanSuratController::class, 'store'])->name('pengajuan.store');
+
+    Route::get('/riwayat', [PengajuanSuratController::class, 'history'])->name('riwayat');
+
+
+    // Route::get('/riwayat', function () {
+    //     return view('profile.riwayat');
+    // })->middleware(['auth', 'verified'])->name('riwayat');
 });
 
 Route::middleware(['role:Admin'])->group(function () {
     Route::get('/dashboard', function () {
         return view('backend.home');
     })->middleware(['auth', 'verified'])->name('dashboard');
+
 
     Route::get('/field', [FieldSuratController::class, 'index'])->name('field');
     Route::get('/field/create', [FieldSuratController::class, 'create'])->name('field.create');
@@ -71,6 +79,9 @@ Route::middleware(['role:Admin'])->group(function () {
 
 
     Route::get('/pengajuan/{id}/cetak', [PengajuanSuratController::class, 'cetak'])->name('pengajuan.cetak');
+    Route::put('/pengajuan/updatestatus/{id?}', [PengajuanSuratController::class, 'approve'])->name('setuju');
+    Route::put('/pengajuan/tolak/{id?}', [PengajuanSuratController::class, 'rejected'])->name('menolak');
+
     Route::patch('/pengajuan/{id}/approve', [PengajuanSuratController::class, 'approve'])->name('pengajuan.approve');
     Route::patch('/pengajuan/{id}/rejected', [PengajuanSuratController::class, 'rejected'])->name('pengajuan.rejected');
 

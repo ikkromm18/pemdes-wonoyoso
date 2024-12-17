@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PengajuanSurat extends Model
 {
@@ -28,6 +29,11 @@ class PengajuanSurat extends Model
     public function DataPengajuans()
     {
         return $this->hasMany(DataPengajuan::class, 'pengajuan_id');
+    }
+
+    public function User(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'nik', 'nik');
     }
 
     // public function user()

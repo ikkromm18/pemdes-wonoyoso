@@ -25,14 +25,17 @@ class PengajuanSuratController extends Controller
     public function index()
     {
 
-        $pengajuansurats = PengajuanSurat::all();
+        $pengajuansurats = PengajuanSurat::orderBy('updated_at', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->paginate(6);
 
-        $datapengajuan = DataPengajuan::all();
+
+
 
 
         $data = [
             'pengajuansurat' => $pengajuansurats,
-            'datapengajuan' => $datapengajuan
+
         ];
 
 
@@ -76,6 +79,9 @@ class PengajuanSuratController extends Controller
 
         $user = auth()->user();
 
+        if (empty($user->nik) || empty($user->alamat)) {
+            return redirect()->route('profile.edit')->with('error', 'Silakan lengkapi data profil Anda terlebih dahulu sebelum membuat pengajuan.');
+        }
 
         $pengajuan = PengajuanSurat::create([
             'nik' => $user->nik,
@@ -105,42 +111,30 @@ class PengajuanSuratController extends Controller
 
     public function approve($id)
     {
-        $pengajuan = PengajuanSurat::findOrFail($id);
+        $pengajuan = PengajuanSurat::where('id', $id)->first();
 
+        if (!$pengajuan) {
+            return redirect()->route('pengajuansurat')->with('error', 'Pengajuan tidak ditemukan.');
+        }
 
         $pengajuan->status = 'approved';
         $pengajuan->save();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Pengajuan berhasil disetujui.',
-        ]);
-
-
-        return response()->json([
-            'success' => false,
-            'message' => 'Pengajuan tidak dapat disetujui.',
-        ]);
+        return redirect()->route('pengajuansurat')->with('success' . 'Pengajuan Berhasil Disetujui');
     }
 
     public function rejected($id)
     {
-        $pengajuan = PengajuanSurat::findOrFail($id);
+        $pengajuan = PengajuanSurat::where('id', $id)->first();
 
+        if (!$pengajuan) {
+            return redirect()->route('pengajuansurat')->with('error', 'Pengajuan tidak ditemukan.');
+        }
 
         $pengajuan->status = 'rejected';
         $pengajuan->save();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Pengajuan ditolak.',
-        ]);
-
-
-        return response()->json([
-            'success' => false,
-            'message' => 'Gagal.',
-        ]);
+        return redirect()->route('pengajuansurat')->with('success' . 'Pengajuan Berhasil Ditolak');
     }
 
 
@@ -194,5 +188,23 @@ class PengajuanSuratController extends Controller
         ];
 
         return view('pdf.pengajuan', $data);
+    }
+
+    public function history()
+    {
+
+        $user = auth()->user();
+        $nik = $user->nik;
+
+
+        $riwayat = PengajuanSurat::where('nik', $nik)->paginate(10);
+
+        $data = [
+            'riwayat' => $riwayat
+        ];
+
+        // dd($data);
+
+        return view('profile.riwayat', $data);
     }
 }
