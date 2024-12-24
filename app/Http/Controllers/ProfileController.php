@@ -39,25 +39,24 @@ class ProfileController extends Controller
         $user->nik = $validatedData['nik'];
 
         if ($request->hasFile('foto_ktp')) {
-            // Hapus file lama jika ada
+
             if ($user->foto_ktp) {
                 Storage::delete('public/' . $user->foto_ktp);
             }
 
-            // Mengatur nama file dan menyimpan ke folder public/uploaded/foto_ktp
-            $imageName = uniqid() . '.' . $request->file('foto_ktp')->extension(); // Menggunakan uniqid() untuk nama file unik
+
+            $imageName = uniqid() . '.' . $request->file('foto_ktp')->extension();
             $request->file('foto_ktp')->move(public_path('uploaded/foto_ktp'), $imageName);
             $user->foto_ktp = url('uploaded/foto_ktp/' . $imageName);
         }
 
         if ($request->hasFile('foto_kk')) {
-            // Hapus file lama jika ada
+
             if ($user->foto_kk) {
                 Storage::delete('public/' . $user->foto_kk);
             }
 
-            // Mengatur nama file dan menyimpan ke folder public/uploaded/foto_kk
-            $imageName = uniqid() . '.' . $request->file('foto_kk')->extension(); // Menggunakan uniqid() untuk nama file unik
+            $imageName = uniqid() . '.' . $request->file('foto_kk')->extension();
             $request->file('foto_kk')->move(public_path('uploaded/foto_kk'), $imageName);
             $user->foto_kk = url('uploaded/foto_kk/' . $imageName);
         }

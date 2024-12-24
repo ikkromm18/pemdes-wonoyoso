@@ -8,6 +8,7 @@ use App\Http\Controllers\JenisSuratController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\PengajuanSuratController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use App\Mail\PengajuanDiajukanMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -75,10 +76,10 @@ Route::middleware(['role:Admin'])->group(function () {
     Route::get('/pengajuan', [PengajuanSuratController::class, 'index'])->name('pengajuansurat');
     Route::get('/pengajuan/{id}', [PengajuanSuratController::class, 'show'])->name('pengajuan.show');
 
+
+
     Route::get('/pengajuan/print/{id}', [PengajuanSuratController::class, 'Print'])->name('print');
-
-
-    Route::get('/pengajuan/{id}/cetak', [PengajuanSuratController::class, 'cetak'])->name('pengajuan.cetak');
+    Route::get('/pengajuan/{id}/unduh', [PengajuanSuratController::class, 'unduh'])->name('pengajuan.unduh');
     Route::put('/pengajuan/updatestatus/{id?}', [PengajuanSuratController::class, 'approve'])->name('setuju');
     Route::put('/pengajuan/tolak/{id?}', [PengajuanSuratController::class, 'rejected'])->name('menolak');
 
@@ -86,6 +87,11 @@ Route::middleware(['role:Admin'])->group(function () {
     Route::patch('/pengajuan/{id}/rejected', [PengajuanSuratController::class, 'rejected'])->name('pengajuan.rejected');
 
     Route::get('/datapengajuan', [DataPengajuanController::class, 'index'])->name('datapengajuan');
+
+    Route::resource('user', UserController::class);
+    Route::get('/useradmin', [UserController::class, 'indexAdmin'])->name('user.admin');
+    Route::get('/editpassword/{id}', [UserController::class, 'editPassword'])->name('user.editpassword');
+    Route::post('/updatepassword/{id}', [UserController::class, 'updatePassword'])->name('user.updatepassword');
 });
 
 require __DIR__ . '/auth.php';

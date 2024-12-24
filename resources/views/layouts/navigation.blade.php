@@ -94,6 +94,11 @@
             </div>
 
             <div class="mt-3 space-y-1">
+
+                <x-responsive-nav-link :href="route('dashboard')">
+                    {{ __('Home') }}
+                </x-responsive-nav-link>
+
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>

@@ -15,15 +15,36 @@ class FielsSuratsSeeder extends Seeder
     public function run(): void
     {
         $data = [
+            // Surat Kematian
             [
                 'jenis_surat_id' => 1,
-                'nama_field' => 'Hari Meninggal',
+                'nama_field' => 'Nama',
                 'tipe_field' => 'text',
             ],
             [
                 'jenis_surat_id' => 1,
-                'nama_field' => 'waktu Meninggal',
-                'tipe_field' => 'time',
+                'nama_field' => 'Jenis Kelamin',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 1,
+                'nama_field' => 'Tempat Lahir',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 1,
+                'nama_field' => 'Tanggal Lahir',
+                'tipe_field' => 'date',
+            ],
+            [
+                'jenis_surat_id' => 1,
+                'nama_field' => 'Alamat',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 1,
+                'nama_field' => 'Hari',
+                'tipe_field' => 'text',
             ],
             [
                 'jenis_surat_id' => 1,
@@ -37,22 +58,79 @@ class FielsSuratsSeeder extends Seeder
             ],
             [
                 'jenis_surat_id' => 1,
-                'nama_field' => 'Sebab Meninggal',
+                'nama_field' => 'Penyebab Kematian',
                 'tipe_field' => 'text',
             ],
+            //2 
             [
-                'jenis_surat_id' => 1,
-                'nama_field' => 'Yang Menentukan Meninggal',
+                'jenis_surat_id' => 2,
+                'nama_field' => 'Nama Lengkap',
                 'tipe_field' => 'text',
             ],
             [
                 'jenis_surat_id' => 2,
-                'nama_field' => 'Keperluan Surat',
+                'nama_field' => 'Tempat Lahir',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 2,
+                'nama_field' => 'Tanggal Lahir',
+                'tipe_field' => 'date',
+            ],
+            [
+                'jenis_surat_id' => 2,
+                'nama_field' => 'Pekerjaan',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 2,
+                'nama_field' => 'Alamat',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 2,
+                'nama_field' => 'NIK',
+                'tipe_field' => 'number',
+            ],
+            [
+                'jenis_surat_id' => 2,
+                'nama_field' => 'Keperluan',
+                'tipe_field' => 'text',
+            ],
+            //3 SKTM
+            [
+                'jenis_surat_id' => 3,
+                'nama_field' => 'Nama Orang Tua',
                 'tipe_field' => 'text',
             ],
             [
                 'jenis_surat_id' => 3,
-                'nama_field' => 'Penghasilan Orang Tua',
+                'nama_field' => 'NIK Orang Tua',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 3,
+                'nama_field' => 'Tempat Lahir Orang Tua',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 3,
+                'nama_field' => 'Tanggal Lahir Orang Tua',
+                'tipe_field' => 'date',
+            ],
+            [
+                'jenis_surat_id' => 3,
+                'nama_field' => 'Pekerjaan',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 3,
+                'nama_field' => 'Alamat',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 3,
+                'nama_field' => 'Rata-Rata Penghasilan',
                 'tipe_field' => 'number',
             ],
             [
@@ -60,6 +138,8 @@ class FielsSuratsSeeder extends Seeder
                 'nama_field' => 'Keperluan Surat',
                 'tipe_field' => 'text',
             ],
+
+            // 
             [
                 'jenis_surat_id' => 4,
                 'nama_field' => 'Nama Usaha',

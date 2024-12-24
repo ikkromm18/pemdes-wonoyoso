@@ -14,21 +14,21 @@ class JenisSuratsSeeder extends Seeder
     public function run(): void
     {
         $data = [
+            // 1
             [
-                'nama_jenis' => 'Surat Keterangan Meninggal Dunia',
-            ],
-
-            [
-                'nama_jenis' => 'Surat Keterangan Kepala Desa',
+                'nama_jenis' => 'Surat Kematian',
             ],
             [
-                'nama_jenis' => 'Surat Pernyataan Jual Beli Tanah',
+                'nama_jenis' => 'Surat Pengantar Umum',
             ],
             [
                 'nama_jenis' => 'Surat Keterangan Tidak Mampu',
             ],
             [
-                'nama_jenis' => 'Surat Pengantar Umum',
+                'nama_jenis' => 'Surat Keterangan Kepala Desa',
+            ],
+            [
+                'nama_jenis' => 'Surat Pernyataan Jual Beli Tanah',
             ],
             // [
             //     'nama_jenis' => 'Surat Keterangan Domisili Penduduk',

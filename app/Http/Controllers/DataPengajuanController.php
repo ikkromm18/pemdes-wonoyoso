@@ -9,7 +9,7 @@ class DataPengajuanController extends Controller
 {
     public function index()
     {
-        $datapengajuan = DataPengajuan::all();
+        $datapengajuan = DataPengajuan::paginate(8)->withQueryString();
 
         $data = [
             'datapengajuan' => $datapengajuan

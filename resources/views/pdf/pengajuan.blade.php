@@ -4,94 +4,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surat Pengajuan {{ $id ?? '1' }}</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 30px;
-        }
+    {{-- <title>Surat Pengajuan {{ $id ?? '1' }}</title> --}}
 
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .header h1 {
-            font-size: 20px;
-            margin: 0;
-        }
-
-        .header p {
-            margin: 0;
-        }
-
-        .content {
-            margin-top: 20px;
-            line-height: 1.5;
-        }
-
-        .content p {
-            margin: 5px 0;
-        }
-
-        .table-wrapper {
-            margin-top: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-
-        th,
-        td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: left;
-        }
-
-        .footer {
-            margin-top: 40px;
-        }
-
-        .footer .signatures {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 40px;
-        }
-
-        .footer .signatures div {
-            text-align: center;
-        }
-
-        .stamp {
-            margin-top: 20px;
-        }
-
-        .stamp img {
-            width: 100px;
-            opacity: 0.7;
-        }
-
-        .flex {
-            display: flex;
-        }
-
-        .flex-row {
-            display: flex;
-            flex-direction: row
-        }
-    </style>
-
+    <link rel="stylesheet" href="{{ public_path('css/tailwind.css') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 </head>
 
+@php
+    if (!function_exists('getRomanMonth')) {
+        function getRomanMonth($month)
+        {
+            $romanMonths = [
+                1 => 'I',
+                2 => 'II',
+                3 => 'III',
+                4 => 'IV',
+                5 => 'V',
+                6 => 'VI',
+                7 => 'VII',
+                8 => 'VIII',
+                9 => 'IX',
+                10 => 'X',
+                11 => 'XI',
+                12 => 'XII',
+            ];
+
+            return $romanMonths[$month] ?? '';
+        }
+    }
+
+    if (!function_exists('getInitials')) {
+        function getInitials($string)
+        {
+            $words = explode(' ', $string); // Pisahkan berdasarkan spasi
+            $initials = '';
+            foreach ($words as $word) {
+                $initials .= strtoupper(substr($word, 0, 1)); // Ambil huruf pertama setiap kata
+            }
+            return $initials;
+        }
+    }
+@endphp
+
 <body>
-    <div class="header flex-row justify-center items-center gap-8">
+    <div class="w-full flex flex-row text-center justify-center items-center gap-8 mb-4">
         <div class="w-20">
-            <img src="./logokop.png" alt="logo">
+            {{-- <img src="{{ asset('logokop.png') }}" alt="logo"> --}}
+            <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('logokop.png'))) }}"
+                alt="logo">
+
         </div>
         <div class="leading-tight">
             <h1 class="font-bold">PEMERINTAH KEBUPATEN PEKALONGAN</h1>
@@ -106,7 +68,10 @@
 
     <div class="flex flex-col mt-4">
         <h3 class="mx-auto text-xl underline font-semibold">SURAT KEMATIAN</h3>
-        <p class="mx-auto">Nomor : 145/34/KM/XII/2024</p>
+        <p class="mx-auto">Nomor :
+            {{ $id }}/{{ getInitials($jenis_surat) }}/{{ getRomanMonth(date('n')) }}/{{ date('Y') }}</p>
+        {{-- <p><strong>Nomor Surat:</strong> {{ $id }}/PDW/{{ date('Y') }}</p> --}}
+
     </div>
 
     <p class="mt-8">Yang bertanda tangan dibawah ini, menerangkan bahwa pada :</p>
@@ -198,7 +163,7 @@
     </div>  --}}
 
     <div class="footer w-full ">
-        <div class="signatures flex mx-auto pl-80">
+        <div class="signatures flex mx-auto pl-80 text-center">
             <div>
                 <p>Pekalongan, 17 Oktober 2024</p>
                 <p>Kepala Desa Wonoyoso</p>
@@ -211,9 +176,9 @@
         </div> --}}
     </div>
     <script>
-        window.onload = function() {
-            window.print();
-        };
+        // window.onload = function() {
+        //     window.print();
+        // };
     </script>
 </body>
 

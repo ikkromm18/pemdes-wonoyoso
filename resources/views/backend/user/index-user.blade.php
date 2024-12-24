@@ -1,14 +1,17 @@
 @extends('layouts.dashboard')
-@section('title', 'DataPengajuan')
+@section('title', 'Data User')
 @section('admin')
 
 
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-2">
 
-        <x-breadcrumb title="Detail Data Pengajuan" dashboard="Dashboard" pagename="Data Pengajuan" />
+        <x-breadcrumb title="Data User" dashboard="Dashboard" pagename="User" />
+
+        @include('components.alert')
 
         <div class="p-4 bg-white dark:bg-gray-900">
+            {{-- <a href="{{ route('field.create') }}" class="btn bg-slate-700 text-white mb-5">+ Tambah Field Surat</a> --}}
             <label for="table-search" class="sr-only">Search</label>
             <div class="relative mt-1">
                 <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -28,13 +31,17 @@
                 <tr>
 
                     <th scope="col" class="px-6 py-3">
-                        Nomor Pengajuan
+                        No
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Nama Field
+                        Nama User
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Nilai
+                        Email
+                    </th>
+
+                    <th scope="col" class="px-6 py-3">
+                        NIK
                     </th>
 
                     <th scope="col" class="px-6 py-3">
@@ -42,33 +49,47 @@
                     </th>
                 </tr>
             </thead>
+            @php
+                $no = 1;
+            @endphp
             <tbody>
-
-                @foreach ($datapengajuan as $dp)
+                @foreach ($users as $user)
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
 
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ $dp->pengajuan_id }}
+                        <th scope="row" class="px-6 py-4 font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                            {{ $no++ }}
                         </th>
                         <td class="px-6 py-4">
-                            {{ $dp->FieldSurats->nama_field }}
-                            {{-- {{ $dp->field_id }} --}}
+                            {{ $user->name }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $dp->nilai }}
+                            {{ $user->email }}
+                        </td>
+
+                        <td class="px-6 py-4">
+                            {{ $user->nik }}
                         </td>
 
                         <td class="px-6 py-4 flex gap-4 md:gap-8">
-                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                            <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline">hapus</a>
+                            <a href="{{ route('user.show', $user->id) }}"
+                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Detail</a>
+                            <form action="{{ route('user.destroy', $user->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+
+                                <button type="submit"
+                                    class="font-medium text-red-600 dark:text-red-500 hover:underline">Hapus</button>
+                            </form>
+
                         </td>
                     </tr>
                 @endforeach
 
             </tbody>
         </table>
-        {{ $datapengajuan->links() }}
+
+        {{ $users->links() }}
     </div>
 
 

@@ -27,7 +27,7 @@ class PengajuanSuratController extends Controller
 
         $pengajuansurats = PengajuanSurat::orderBy('updated_at', 'desc')
             ->orderBy('created_at', 'desc')
-            ->paginate(6);
+            ->paginate(6)->withQueryString();
 
 
 
@@ -138,7 +138,7 @@ class PengajuanSuratController extends Controller
     }
 
 
-    public function cetak($id)
+    public function unduh($id)
     {
         $pengajuan = PengajuanSurat::with('JenisSurats', 'DataPengajuans.FieldSurats')
             ->findOrFail($id);
@@ -171,6 +171,8 @@ class PengajuanSuratController extends Controller
         $pengajuan = PengajuanSurat::with('JenisSurats', 'DataPengajuans.FieldSurats')
             ->findOrFail($id);
 
+
+
         $data = [
             'id' => $pengajuan->id,
             'nik' => $pengajuan->nik,
@@ -187,6 +189,7 @@ class PengajuanSuratController extends Controller
             }),
         ];
 
+
         return view('pdf.pengajuan', $data);
     }
 
@@ -202,8 +205,6 @@ class PengajuanSuratController extends Controller
         $data = [
             'riwayat' => $riwayat
         ];
-
-        // dd($data);
 
         return view('profile.riwayat', $data);
     }
