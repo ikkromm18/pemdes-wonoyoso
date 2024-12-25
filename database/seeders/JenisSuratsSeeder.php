@@ -25,10 +25,10 @@ class JenisSuratsSeeder extends Seeder
                 'nama_jenis' => 'Surat Keterangan Tidak Mampu',
             ],
             [
-                'nama_jenis' => 'Surat Keterangan Kepala Desa',
+                'nama_jenis' => 'Surat Keterangan Kelahiran',
             ],
             [
-                'nama_jenis' => 'Surat Pernyataan Jual Beli Tanah',
+                'nama_jenis' => 'Surat Keterangan Usaha',
             ],
             // [
             //     'nama_jenis' => 'Surat Keterangan Domisili Penduduk',
