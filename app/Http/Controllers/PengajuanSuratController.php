@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Mail\PengajuanDiajukanMail;
 use App\Models\DataPengajuan;
 use App\Models\PengajuanSurat;
-use App\Models\FieldSurat;
 use App\Models\User;
 use App\Notifications\NewPengajuan;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -29,16 +28,10 @@ class PengajuanSuratController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(6)->withQueryString();
 
-
-
-
-
         $data = [
             'pengajuansurat' => $pengajuansurats,
 
         ];
-
-
 
         return view('backend.pengajuan.index', $data);
     }
@@ -190,7 +183,30 @@ class PengajuanSuratController extends Controller
         ];
 
 
-        return view('pdf.pengajuan', $data);
+        // dd($data);
+
+        if ($pengajuan->jenis_surat_id == 1) {
+            return view('pdf.suratkematian', $data);
+        }
+
+        if ($pengajuan->jenis_surat_id == 2) {
+            return view('pdf.pengantarumum', $data);
+        }
+
+        if ($pengajuan->jenis_surat_id == 3) {
+            return view('pdf.sktm', $data);
+        }
+
+        if ($pengajuan->jenis_surat_id == 4) {
+            return view('pdf.suratkelahiran', $data);
+        }
+
+        if ($pengajuan->jenis_surat_id == 5) {
+            return view('pdf.suketusaha', $data);
+        }
+
+
+        return "Halaman Cetak Belum Dibuat";
     }
 
     public function history()

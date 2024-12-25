@@ -17,7 +17,7 @@
                         Masukkan Password Lama
                     </label>
                     <input id="oldpassword" type="password" name="oldpassword"
-                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 @error('oldpassword') border-red-500 @enderror"
+                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border  focus:ring-blue-500 focus:border-blue-500 @error('oldpassword') border-red-500 @enderror"
                         value="">
                     @error('oldpassword')
                         <p class="mt-2 text-sm text-red-600">
@@ -33,7 +33,7 @@
                         Masukkan Password Baru
                     </label>
                     <input id="newpassword" type="password" name="newpassword"
-                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 @error('newpassword') border-red-500 @enderror"
+                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border  focus:ring-blue-500 focus:border-blue-500 @error('newpassword') border-red-500 @enderror"
                         value="">
                     @error('newpassword')
                         <p class="mt-2 text-sm text-red-600">
@@ -49,7 +49,7 @@
                         Konfirmasi Password Baru
                     </label>
                     <input id="konfirmpassword" type="password" name="konfirmpassword"
-                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 @error('konfirmpassword') border-red-500 @enderror"
+                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border  focus:ring-blue-500 focus:border-blue-500 @error('konfirmpassword') border-red-500 @enderror"
                         value="">
                     @error('konfirmpassword')
                         <p class="mt-2 text-sm text-red-600">
