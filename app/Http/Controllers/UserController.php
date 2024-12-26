@@ -16,6 +16,7 @@ class UserController extends Controller
         $data = [
             'users' => $users
         ];
+        
 
         return view('backend.user.index-user', $data);
     }
