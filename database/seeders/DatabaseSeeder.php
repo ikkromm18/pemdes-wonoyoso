@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Admin User',
+            'name' => 'Admin',
             'email' => 'admin@example.com',
             'password' => bcrypt('password'), // Pastikan menggunakan hash
             'role' => 'Admin',
