@@ -139,45 +139,101 @@ class FielsSuratsSeeder extends Seeder
                 'tipe_field' => 'text',
             ],
 
-            // 
+            // Surat Keterangan Lahir
             [
                 'jenis_surat_id' => 4,
-                'nama_field' => 'Nama Usaha',
+                'nama_field' => 'Nama Lengkap',
                 'tipe_field' => 'text',
             ],
             [
                 'jenis_surat_id' => 4,
-                'nama_field' => 'Lokasi Usaha',
+                'nama_field' => 'NIK',
+                'tipe_field' => 'number',
+            ],
+            [
+                'jenis_surat_id' => 4,
+                'nama_field' => 'Tampat Lahir',
                 'tipe_field' => 'text',
             ],
             [
                 'jenis_surat_id' => 4,
-                'nama_field' => 'Jenis Usaha',
+                'nama_field' => 'Tanggal Lahir',
+                'tipe_field' => 'date',
+            ],
+            [
+                'jenis_surat_id' => 4,
+                'nama_field' => 'Jenis Kelamin',
                 'tipe_field' => 'text',
             ],
             [
                 'jenis_surat_id' => 4,
-                'nama_field' => 'Keterangan Usaha',
+                'nama_field' => 'Alamat',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 4,
+                'nama_field' => 'Nama Ayah',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 4,
+                'nama_field' => 'NIK Ayah',
+                'tipe_field' => 'number',
+            ],
+            [
+                'jenis_surat_id' => 4,
+                'nama_field' => 'Nama Ibu',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 4,
+                'nama_field' => 'NIK Ibu',
+                'tipe_field' => 'number',
+            ],
+            //Surat Keterangan Usaha 
+            [
+                'jenis_surat_id' => 5,
+                'nama_field' => 'Nama Lengkap',
                 'tipe_field' => 'text',
             ],
             [
                 'jenis_surat_id' => 5,
-                'nama_field' => 'Nama Penduduk Yang Meninggal',
+                'nama_field' => 'Tempat Lahir',
                 'tipe_field' => 'text',
             ],
             [
                 'jenis_surat_id' => 5,
-                'nama_field' => 'Hari Meninggal',
-                'tipe_field' => 'text',
-            ],
-            [
-                'jenis_surat_id' => 5,
-                'nama_field' => 'Tanggal Meninggal',
+                'nama_field' => 'Tanggal Lahir',
                 'tipe_field' => 'date',
             ],
             [
                 'jenis_surat_id' => 5,
-                'nama_field' => 'Tempat Meninggal',
+                'nama_field' => 'NIK',
+                'tipe_field' => 'number',
+            ],
+            [
+                'jenis_surat_id' => 5,
+                'nama_field' => 'Pekerjaan',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 5,
+                'nama_field' => 'Alamat',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 5,
+                'nama_field' => 'Nama / Jenis Usaha',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 5,
+                'nama_field' => 'Alamat Usaha',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 5,
+                'nama_field' => 'Keperluan',
                 'tipe_field' => 'text',
             ],
             // [
