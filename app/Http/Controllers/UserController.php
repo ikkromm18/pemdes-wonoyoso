@@ -11,7 +11,7 @@ class UserController extends Controller
     public function index()
     {
 
-        $users = User::where('role', 'User')->paginate(7);
+        $users = User::where('role', 'user')->paginate(7);
 
         $data = [
             'users' => $users
@@ -23,7 +23,7 @@ class UserController extends Controller
 
     public function indexAdmin()
     {
-        $users = User::where('role', 'Admin')->paginate(7);
+        $users = User::where('role', 'admin')->paginate(7);
 
         $data = [
             'users' => $users

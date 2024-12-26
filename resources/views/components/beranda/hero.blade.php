@@ -1,20 +1,8 @@
-<style>
-    #my-background {
-        position: relative;
-        /* Untuk memastikan anak-anak elemen tidak melanggar struktur */
-        z-index: 0;
-        /* Background harus di bawah elemen lain */
-    }
-
-    .hero-content {
-        position: relative;
-        /* Agar tetap di atas */
-        z-index: 1;
-        /* Konten berada di atas background */
-    }
-</style>
-
-<div id="my-background" class="flex justify-center pt-16 pb-8">
+<div class="flex justify-center pt-16 pb-8"
+    style="background-image: url(../images/bg-white.jpg);
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center">
     <div class="hero-content bg-opacity-90  text-center flex flex-col">
         <div class="max-w-md">
             <h1 class="mb-2 text-5xl font-bold">Urus Administrasi <span class="text-[#E16741]"> Jadi Lebih Mudah!</span>
@@ -92,27 +80,12 @@
                     </div>
                 </div>
 
+
+
+
+
+
             </div>
         </div>
     </div>
 </div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vanta/dist/vanta.waves.min.js"></script>
-
-<script>
-    VANTA.WAVES({
-        el: "#my-background",
-        mouseControls: true,
-        touchControls: true,
-        gyroControls: false,
-        minHeight: 200.00,
-        minWidth: 200.00,
-        scale: 1.00,
-        scaleMobile: 1.00,
-        color: 0xffd2d2,
-        shininess: 40.00,
-        waveHeight: 17.00,
-        zoom: 1.11
-    })
-</script>
