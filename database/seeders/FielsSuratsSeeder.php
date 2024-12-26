@@ -228,6 +228,11 @@ class FielsSuratsSeeder extends Seeder
             ],
             [
                 'jenis_surat_id' => 5,
+                'nama_field' => 'Alamat Usaha',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 5,
                 'nama_field' => 'Keperluan',
                 'tipe_field' => 'text',
             ],
