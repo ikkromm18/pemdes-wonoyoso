@@ -6,6 +6,8 @@
 
     <x-beranda.services />
 
+    <x-beranda.daftar-layanan :jenissurats="$jenissurats" />
+
     <x-beranda.sambutan />
 
 

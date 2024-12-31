@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\BerandaController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataPengajuanController;
 use App\Http\Controllers\FieldSuratController;
 use App\Http\Controllers\JenisSuratController;
@@ -52,10 +53,11 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware(['role:Admin'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('backend.home');
-    })->middleware(['auth', 'verified'])->name('dashboard');
+    // Route::get('/dashboard', function () {
+    //     return view('backend.home');
+    // })->middleware(['auth', 'verified'])->name('dashboard');
 
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/field', [FieldSuratController::class, 'index'])->name('field');
     Route::get('/field/create', [FieldSuratController::class, 'create'])->name('field.create');

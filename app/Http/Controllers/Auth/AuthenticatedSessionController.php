@@ -30,7 +30,8 @@ class AuthenticatedSessionController extends Controller
 
         // return redirect()->intended(route('home', absolute: false));
 
-        return view('frontend.beranda');
+        // return view('frontend.beranda');
+        return redirect()->route('home');
     }
 
     /**
