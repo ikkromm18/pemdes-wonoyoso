@@ -23,7 +23,9 @@ class PengajuanSuratTest extends TestCase
         // Setup any necessary data here
     }
 
-    /** @test */
+    /**
+     * A basic test example.
+     */
     public function testMenampilakanHalamanLayanan(): void
     {
         $user = User::factory()->create();
@@ -35,7 +37,9 @@ class PengajuanSuratTest extends TestCase
         // Assert the response status is 200 (OK)
         $response->assertStatus(200);
     }
-
+    /**
+     * A basic test example.
+     */
     public function testUserHarusLoginSebelumMengaksesLayanan(): void
     {
         // Mencoba mengakses halaman layanan tanpa login
@@ -47,7 +51,9 @@ class PengajuanSuratTest extends TestCase
         // Memastikan pengguna diarahkan ke halaman login
         $response->assertRedirect(route('login'));
     }
-
+    /**
+     * A basic test example.
+     */
     public function testUserMengaksesHalamanProfile(): void
     {
         $user = User::factory()->create();
@@ -57,7 +63,9 @@ class PengajuanSuratTest extends TestCase
 
         $response->assertStatus(200);
     }
-
+    /**
+     * A basic test example.
+     */
     public function testUserDapatMelengkapiDataProfil()
     {
         // Membuat pengguna dan login
@@ -84,7 +92,9 @@ class PengajuanSuratTest extends TestCase
         $response->assertStatus(200);
     }
 
-    /** @test */
+    /**
+     * A basic test example.
+     */
     public function testUserDapatMengajukanSurat()
     {
         $user = User::factory()->create([
@@ -109,7 +119,9 @@ class PengajuanSuratTest extends TestCase
         $response->assertStatus(200);
     }
 
-    /** @test */
+    /**
+     * A basic test example.
+     */
     public function testAdminDapatMengaksesDataPengajuanSurat()
     {
         $user = User::factory()->create([
@@ -122,7 +134,9 @@ class PengajuanSuratTest extends TestCase
 
         $response->assertStatus(200);
     }
-
+    /**
+     * A basic test example.
+     */
     public function testAdminDapatMelihatDetailDataPengajuan()
     {
         $admin = User::factory()->create([
@@ -153,7 +167,9 @@ class PengajuanSuratTest extends TestCase
         $response->assertStatus(200);
     }
 
-    /** @test */
+    /**
+     * A basic test example.
+     */
     public function testAdminDapatMenyetujuiPengajuanAdministrasi()
     {
 
@@ -171,7 +187,9 @@ class PengajuanSuratTest extends TestCase
         $response->assertStatus(200);
     }
 
-    /** @test */
+    /**
+     * A basic test example.
+     */
     public function testAdminDapatMenolakPengajuanAdministrasi()
     {
 
@@ -188,7 +206,9 @@ class PengajuanSuratTest extends TestCase
 
         $response->assertStatus(200);
     }
-
+    /**
+     * A basic test example.
+     */
     public function testAdminDapatMencetakSurat()
     {
         // Membuat role admin jika diperlukan
