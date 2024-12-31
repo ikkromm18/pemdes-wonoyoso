@@ -3,11 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\JenisSurat;
 
 class BerandaController extends Controller
 {
     public function index()
     {
-        return view('frontend.beranda');
+        $jenisurats = JenisSurat::all();
+        $data = [
+
+            'jenissurats' => $jenisurats
+        ];
+        return view('frontend.beranda', $data);
     }
 }
