@@ -205,6 +205,28 @@ class PengajuanSuratController extends Controller
             return view('pdf.suketusaha', $data);
         }
 
+        if ($pengajuan->jenis_surat_id == 6) {
+            return view('pdf.suketdomisili', $data);
+        }
+
+        if ($pengajuan->jenis_surat_id == 7) {
+            return view('pdf.suketahliwaris', $data);
+        }
+
+
+        if ($pengajuan->jenis_surat_id == 8) {
+            return view('pdf.pengantarizinkeramaian', $data);
+        }
+
+
+        if ($pengajuan->jenis_surat_id == 9) {
+            return view('pdf.suketpindahpenduduk', $data);
+        }
+
+        if ($pengajuan->jenis_surat_id == 10) {
+            return view('pdf.suketkehilangan', $data);
+        }
+
 
         return "Halaman Cetak Belum Dibuat";
     }
