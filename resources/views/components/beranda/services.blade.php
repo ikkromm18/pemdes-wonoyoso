@@ -52,8 +52,8 @@
                             4
                         </h2>
                         <div class="">
-                            <h3 class="text-xl font-bold">Dapatkan Notifikasi</h3>
-                            <p>Terima pemberitahuan via email untuk setiap perkembangan pengajuan</p>
+                            <h3 class="text-xl font-bold">Pantau Status Pengajuan</h3>
+                            <p>Pantau Status Pengajuan Anda untuk mengetahui perkembangan pengajuan Anda</p>
                         </div>
                     </div>
 
