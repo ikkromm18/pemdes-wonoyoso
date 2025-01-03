@@ -5,7 +5,7 @@
         <!-- Session Status -->
         <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-lg overflow-hidden sm:rounded-lg mx-auto">
 
-
+            @include('components.alert')
             <x-auth-session-status class="mb-4" :status="session('status')" />
 
             <div class="w-36 flex mx-auto mb-4">

@@ -27,24 +27,71 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    // public function store(Request $request): RedirectResponse
+    // {
+    //     $request->validate([
+    //         'name' => ['required', 'string', 'max:255'],
+    //         'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+    //         'password' => ['required', 'confirmed', Rules\Password::defaults()],
+    //     ]);
+
+    //     $user = User::create([
+    //         'name' => $request->name,
+    //         'email' => $request->email,
+    //         'password' => Hash::make($request->password),
+    //     ]);
+
+    //     event(new Registered($user));
+
+    //     Auth::login($user);
+
+    //     return redirect(route('home', absolute: false));
+    // }
+
+    public function daftar(Request $request): RedirectResponse
     {
-        $request->validate([
+        // Validasi data input termasuk file upload
+        $cek =  $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'nik' => ['nullable', 'regex:/^\d{16}$/'], // Validasi NIK harus 16 digit angka
+            'alamat' => ['nullable', 'string', 'max:255'],
+            'foto_ktp' => ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:2048'], // Max 2MB
+            'foto_kk' => ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:2048'],  // Max 2MB
         ]);
 
+        // dd($cek);
+        // Persiapkan nama file untuk foto KTP dan KK
+        $fotoKTP = null;
+        if ($request->hasFile('foto_ktp')) {
+            $imageName = uniqid() . '.' . $request->file('foto_ktp')->extension();
+            $request->file('foto_ktp')->move(public_path('uploaded/foto_ktp'), $imageName);
+            $fotoKTP = url('uploaded/foto_ktp/' . $imageName);
+        }
+
+        $fotoKK = null;
+        if ($request->hasFile('foto_kk')) {
+            $imageName = uniqid() . '.' . $request->file('foto_kk')->extension();
+            $request->file('foto_kk')->move(public_path('uploaded/foto_kk'), $imageName);
+            $fotoKK = url('uploaded/foto_kk/' . $imageName);
+        }
+
+        // Buat pengguna baru
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'nik' => $request->nik,
+            'alamat' => $request->alamat,
+            'foto_ktp' => $fotoKTP,
+            'foto_kk' => $fotoKK,
         ]);
 
         event(new Registered($user));
 
-        Auth::login($user);
-
-        return redirect(route('home', absolute: false));
+        // Redirect ke halaman login
+        // return redirect(route('login', absolute: false));
+        return redirect()->route('login')->with('success', 'Registrasi Sukses, Silahkan Login');
     }
 }
