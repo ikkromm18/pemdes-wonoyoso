@@ -11,6 +11,7 @@ use App\Http\Controllers\PengajuanSuratController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Mail\PengajuanDiajukanMail;
+use Filament\Pages\Dashboard;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,7 @@ Route::get('/test', function () {
 
 
 Route::get('/api/fields/{jenisSuratsId}', [LayananController::class, 'getFieldSurats']);
+Route::get('/api/statistikpengajuan', [DashboardController::class, 'jumlahPengajuanPerJenis']);
 
 Route::get('/send-email', function () {
     $data = [
