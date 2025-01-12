@@ -233,6 +233,11 @@
                                 <td>:</td>
                                 <td><img src="${data.foto_ktp || '#'}" class="w-64" alt="Foto KTP"></td>
                             </tr>
+                             <tr>
+                                <td><strong>Foto KK</strong></td>
+                                <td>:</td>
+                                <td><img src="${data.foto_kk || '#'}" class="w-64" alt="Foto KK"></td>
+                            </tr>
                     `;
 
                             // Tambahkan data detail jika ada

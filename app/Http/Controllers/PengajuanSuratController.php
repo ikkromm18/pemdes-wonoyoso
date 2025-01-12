@@ -50,6 +50,7 @@ class PengajuanSuratController extends Controller
             'email' => $pengajuan->email,
             'alamat' => $pengajuan->alamat,
             'foto_ktp' => $user->foto_ktp,
+            'foto_kk' => $user->foto_kk,
             'jenis_surat' => $pengajuan->JenisSurats->nama_jenis,
             'status' => $pengajuan->status,
             'details' => $pengajuan->DataPengajuans->map(function ($detail) {
@@ -70,7 +71,7 @@ class PengajuanSuratController extends Controller
             'fields' => 'required|array'
         ]);
 
-        $user = auth()->user();
+        $user = $request->user();
 
         if (empty($user->nik) || empty($user->alamat)) {
             return redirect()->route('profile.edit')->with('error', 'Silakan lengkapi data profil Anda terlebih dahulu sebelum membuat pengajuan.');
@@ -231,10 +232,11 @@ class PengajuanSuratController extends Controller
         return "Halaman Cetak Belum Dibuat";
     }
 
-    public function history()
+    public function history(Request $request)
     {
 
-        $user = auth()->user();
+        $user = $request->user();
+
         $nik = $user->nik;
 
 
