@@ -8,10 +8,16 @@ use Illuminate\Http\Request;
 
 class FieldSuratController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
 
-        $fields = FieldSurat::paginate(7)->withQueryString();
+        $search = $request->input('search');
+
+        $fields = FieldSurat::query()->when($search, function ($query, $search) {
+
+            $query->where('nama_field', 'like', "%{$search}%");
+        })->paginate(7);
+        // $fields = FieldSurat::paginate(7)->withQueryString();
 
         $data = [
             'field' => $fields
