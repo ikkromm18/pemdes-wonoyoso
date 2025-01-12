@@ -21,10 +21,19 @@ class PengajuanSuratController extends Controller
     public $email = '';
 
 
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->input('search');
 
-        $pengajuansurats = PengajuanSurat::orderBy('updated_at', 'desc')
+        // $pengajuansurats = PengajuanSurat::orderBy('updated_at', 'desc')
+        //     ->orderBy('created_at', 'desc')
+        //     ->paginate(6)->withQueryString();
+
+        $pengajuansurats = PengajuanSurat::when($search, function ($query, $search) {
+            $query->where('nama', 'like', "%{$search}%")
+                ->orWhere('jenis_surat', 'like', "%{$search}%");
+        })
+            ->orderBy('updated_at', 'desc')
             ->orderBy('created_at', 'desc')
             ->paginate(6)->withQueryString();
 

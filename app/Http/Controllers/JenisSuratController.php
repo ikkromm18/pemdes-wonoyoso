@@ -7,10 +7,19 @@ use Illuminate\Http\Request;
 
 class JenisSuratController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
 
-        $jenisSurats = JenisSurat::paginate(7)->withQueryString();
+
+        $search = $request->input('search');
+
+        // $jenisSurats = JenisSurat::paginate(7)->withQueryString();
+
+        $jenisSurats = JenisSurat::query()
+            ->when($search, function ($query, $search) {
+                $query->where('nama_jenis', 'like', '%' . $search . '%');
+            })
+            ->paginate(7);
 
         $data = [
             'jenisSurats' => $jenisSurats

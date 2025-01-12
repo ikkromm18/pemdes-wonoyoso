@@ -8,10 +8,20 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
 
-        $users = User::where('role', 'User')->paginate(7);
+        $search = $request->input('search');
+
+        $users = User::where('role', 'User')
+            ->when($search, function ($query, $search) {
+                $query->where('name', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%");
+            })
+            ->paginate(7)
+            ->withQueryString();
+
+        // $users = User::where('role', 'User')->paginate(7);
 
         $data = [
             'users' => $users
@@ -21,9 +31,21 @@ class UserController extends Controller
         return view('backend.user.index-user', $data);
     }
 
-    public function indexAdmin()
+    public function indexAdmin(Request $request)
     {
-        $users = User::where('role', 'Admin')->paginate(7);
+
+        $search = $request->input('search');
+
+
+        // $users = User::where('role', 'Admin')->paginate(7);
+
+        $users = User::where('role', 'Admin')
+            ->when($search, function ($query, $search) {
+                $query->where('name', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%");
+            })
+            ->paginate(7)
+            ->withQueryString();
 
         $data = [
             'users' => $users
