@@ -56,39 +56,27 @@ class JenisSuratsSeeder extends Seeder
                 'nama_jenis' => 'Surat Pengantar Keterangan Kehilangan',
             ],
 
-
+            // 11
             [
-                'nama_jenis' => 'Surat Pengantar KTP',
+                'nama_jenis' => 'Surat Keterangan Domisili Usaha',
             ],
-            [
-                'nama_jenis' => 'Surat Pengantar Laporan Kehilangan',
-            ],
-            [
-                'nama_jenis' => 'Surat Keterangan Domisii Usaha',
-            ],
-            [
-                'nama_jenis' => 'Surat Keterangan Jamkesos',
-            ],
-            [
-                'nama_jenis' => 'Surat Permohonan Akta Lahir',
-            ],
-
-
-            [
-                'nama_jenis' => 'Surat Pernyataan Belum Memiliki Akta ahir',
-            ],
-            [
-                'nama_jenis' => 'Surat Keterangan Domisili Kantor',
-            ],
+            // 12
             [
                 'nama_jenis' => 'Surat Pengantar IMB',
             ],
+            // 13
             [
-                'nama_jenis' => 'Surat SITU / SIUP',
+                'nama_jenis' => 'Surat SITU',
             ],
+            [
+                'nama_jenis' => 'Surat SIUP',
+            ],
+            // 14
             [
                 'nama_jenis' => 'Surat Penghasilan Orang Tua',
             ],
+
+
         ];
 
         DB::table('jenis_surats')->insert($data);

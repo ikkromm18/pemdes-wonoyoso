@@ -83,6 +83,9 @@
                                 Lainnya
                             </button>
 
+                            {{-- <a href="{{ route('pengajuan.detail', $ps->id) }}"
+                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Detail</a> --}}
+
 
 
                             <div id="default-modal-{{ $ps->id }}" tabindex="-1" aria-hidden="true"

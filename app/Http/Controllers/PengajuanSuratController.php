@@ -71,6 +71,26 @@ class PengajuanSuratController extends Controller
         ]);
     }
 
+    public function detail($id)
+    {
+
+        $pengajuan = PengajuanSurat::with('JenisSurats', 'DataPengajuans.FieldSurats')
+            ->findOrFail($id);
+
+        $user = User::where('nik', $pengajuan->nik)->first();
+
+        $details = DataPengajuan::where('pengajuan_id', $pengajuan->id)->get();
+
+        dd($details);
+
+        $data = [
+            'pengajuan' => $pengajuan,
+            'user' => $user
+        ];
+
+        dd($data);
+    }
+
 
     public function store(Request $request)
     {
@@ -92,7 +112,7 @@ class PengajuanSuratController extends Controller
             'email' => $user->email,
             'alamat' => $user->alamat,
             'jenis_surat_id' => $request->jenis_surat_id,
-            'status' => 'pending',
+            'status' => 'diajukan',
         ]);
 
 
@@ -120,7 +140,7 @@ class PengajuanSuratController extends Controller
             return redirect()->route('pengajuansurat')->with('error', 'Pengajuan tidak ditemukan.');
         }
 
-        $pengajuan->status = 'approved';
+        $pengajuan->status = 'disetujui';
         $pengajuan->save();
 
         return redirect()->route('pengajuansurat')->with('success' . 'Pengajuan Berhasil Disetujui');
@@ -134,7 +154,7 @@ class PengajuanSuratController extends Controller
             return redirect()->route('pengajuansurat')->with('error', 'Pengajuan tidak ditemukan.');
         }
 
-        $pengajuan->status = 'rejected';
+        $pengajuan->status = 'ditolak';
         $pengajuan->save();
 
         return redirect()->route('pengajuansurat')->with('success' . 'Pengajuan Berhasil Ditolak');
@@ -235,6 +255,14 @@ class PengajuanSuratController extends Controller
 
         if ($pengajuan->jenis_surat_id == 10) {
             return view('pdf.suketkehilangan', $data);
+        }
+
+        if ($pengajuan->jenis_surat_id == 11) {
+            return view('pdf.suketdomisiliusaha', $data);
+        }
+
+        if ($pengajuan->jenis_surat_id == 12) {
+            return view('pdf.pengantarimb', $data);
         }
 
 
