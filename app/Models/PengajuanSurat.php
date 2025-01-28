@@ -17,7 +17,8 @@ class PengajuanSurat extends Model
         'email',
         'alamat',
         'jenis_surat_id',
-        'status'
+        'status',
+        'keterangan'
     ];
 
 

@@ -51,12 +51,15 @@
                             </td>
 
                             <td
-                                class="px-6 py-4 {{ $r->status == 'approved' ? 'text-green-500' : ($r->status == 'pending' ? 'text-gray-700' : 'text-red-500') }}
+                                class="px-6 py-4 {{ $r->status == 'disetujui' ? 'text-green-500' : ($r->status == 'diajukan' ? 'text-gray-700' : 'text-red-500') }}
 ">
                                 {{-- {{ $f->is_required == 1 ? 'Ya' : 'Tidak' }} --}}
                                 {{ $r->status }}
                             </td>
 
+                            <td class="px-6 py-4">
+                                {{ $r->keterangan ?? '-' }}
+                            </td>
 
                         </tr>
                     @endforeach

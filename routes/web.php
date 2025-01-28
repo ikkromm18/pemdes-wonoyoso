@@ -79,6 +79,8 @@ Route::middleware(['role:Admin'])->group(function () {
 
     Route::get('/pengajuan', [PengajuanSuratController::class, 'index'])->name('pengajuansurat');
     Route::get('/pengajuan/{id}', [PengajuanSuratController::class, 'show'])->name('pengajuan.show');
+    Route::get('/pengajuandetail/{id}', [PengajuanSuratController::class, 'detail'])->name('pengajuan.detail');
+
 
 
 

@@ -478,6 +478,95 @@ class FielsSuratsSeeder extends Seeder
                 'nama_field' => 'Keperluan',
                 'tipe_field' => 'text',
             ],
+
+            // Surat Keterangan Domisili Usaha
+            [
+                'jenis_surat_id' => 11,
+                'nama_field' => 'NIK',
+                'tipe_field' => 'number',
+            ],
+            [
+                'jenis_surat_id' => 11,
+                'nama_field' => 'Nama Lengkap',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 11,
+                'nama_field' => 'Tempat Lahir',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 11,
+                'nama_field' => 'Tanggal Lahir',
+                'tipe_field' => 'date',
+            ],
+            [
+                'jenis_surat_id' => 11,
+                'nama_field' => 'Agama',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 11,
+                'nama_field' => 'Pekerjaan',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 11,
+                'nama_field' => 'Alamat',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 11,
+                'nama_field' => 'Nama Usaha',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 11,
+                'nama_field' => 'Tempat Usaha',
+                'tipe_field' => 'text',
+            ],
+
+            // Surat Pengantar IMB
+            [
+                'jenis_surat_id' => 12,
+                'nama_field' => 'NIK',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 12,
+                'nama_field' => 'Nama Lengkap',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 12,
+                'nama_field' => 'Tempat Lahir',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 12,
+                'nama_field' => 'Tanggal Lahir',
+                'tipe_field' => 'date',
+            ],
+            [
+                'jenis_surat_id' => 12,
+                'nama_field' => 'Alamat',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 12,
+                'nama_field' => 'Jenis Bangunan',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 12,
+                'nama_field' => 'Lokasi Bangunan',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 12,
+                'nama_field' => 'Luas Bangunan',
+                'tipe_field' => 'text',
+            ],
         ];
 
         DB::table('field_surats')->insert($data);
