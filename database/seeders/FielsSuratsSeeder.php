@@ -567,6 +567,57 @@ class FielsSuratsSeeder extends Seeder
                 'nama_field' => 'Luas Bangunan',
                 'tipe_field' => 'text',
             ],
+            // Pengantar SKCK
+            [
+                'jenis_surat_id' => 13,
+                'nama_field' => 'Nama Lengkap',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 13,
+                'nama_field' => 'Jenis Kelamin',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 13,
+                'nama_field' => 'Tempat Lahir',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 13,
+                'nama_field' => 'Tanggal Lahir',
+                'tipe_field' => 'date',
+            ],
+            [
+                'jenis_surat_id' => 13,
+                'nama_field' => 'Status Perkawinan',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 13,
+                'nama_field' => 'Kewarganegaraan',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 13,
+                'nama_field' => 'Agama',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 13,
+                'nama_field' => 'Pekerjaan',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 13,
+                'nama_field' => 'NIK',
+                'tipe_field' => 'number',
+            ],
+            [
+                'jenis_surat_id' => 13,
+                'nama_field' => 'Alamat',
+                'tipe_field' => 'text',
+            ],
         ];
 
         DB::table('field_surats')->insert($data);
