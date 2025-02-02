@@ -66,15 +66,21 @@ class JenisSuratsSeeder extends Seeder
             ],
             // 13
             [
-                'nama_jenis' => 'Surat SITU',
-            ],
-            [
-                'nama_jenis' => 'Surat SIUP',
+                'nama_jenis' => 'Surat Pengantar SKCK',
             ],
             // 14
             [
+                'nama_jenis' => 'Surat Pembuatan KTP',
+            ],
+            // 15
+            [
                 'nama_jenis' => 'Surat Penghasilan Orang Tua',
             ],
+
+            // Surat Keterangan Belum Menikah
+            // Surat Keterangan Tanah
+            // Surat Keterangan Harga Tanah
+            // 
 
 
         ];

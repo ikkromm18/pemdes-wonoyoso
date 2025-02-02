@@ -264,6 +264,9 @@ class PengajuanSuratController extends Controller
         if ($pengajuan->jenis_surat_id == 12) {
             return view('pdf.pengantarimb', $data);
         }
+        if ($pengajuan->jenis_surat_id == 13) {
+            return view('pdf.pengantarskck', $data);
+        }
 
 
         return "Halaman Cetak Belum Dibuat";
