@@ -64,11 +64,11 @@
 
                             <div class="mt-4">
 
-                                <button type="submit" class="btn bg-blue-700 text-white">
+                                <button type="submit" class="btn bg-blue-700 text-white" dusk="setuju-button">
                                     Setuju
                                 </button>
 
-                                <button data-modal-hide="popup-modal-setuju" type="button"
+                                <button data-modal-hide="popup-modal-setuju" type="button" dusk="tolak-button"
                                     class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-20 focus:ring-4 focus:ring-gray-100 ">
                                     Kembali</button>
                             </div>
@@ -182,14 +182,25 @@
             <div class="space-y-4">
                 @foreach ($detail as $d)
                     <div>
-                        <label
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ $d->fieldSurats->nama_field }}</label>
-                        <input value="{{ $d->nilai }}"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            disabled />
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            {{ $d->fieldSurats->nama_field }}
+                        </label>
+
+                        @if (filter_var($d->nilai, FILTER_VALIDATE_URL) && preg_match('/\.(jpg|jpeg|png|gif|webp)$/i', $d->nilai))
+                            <!-- Jika nilai adalah URL dan format file gambar -->
+                            <img src="{{ $d->nilai }}" alt="Foto Pengajuan" class="w-64 rounded-lg border">
+                        @else
+                            <!-- Jika nilai bukan file gambar, tampilkan dalam input -->
+                            <input value="{{ $d->nilai }}"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
+                    focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 
+                    dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                disabled />
+                        @endif
                     </div>
                 @endforeach
             </div>
+
         </div>
 
         <!-- Grid untuk Foto -->
