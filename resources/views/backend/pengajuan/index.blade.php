@@ -51,7 +51,7 @@
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
 
                         <td class="px-6 py-4">
-                            {{ $no++ }}
+                            {{ ($pengajuansurat->currentPage() - 1) * $pengajuansurat->perPage() + $loop->iteration }}
                         </td>
                         <td class="px-6 py-4">
                             {{ $ps->id }}
