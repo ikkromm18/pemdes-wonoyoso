@@ -12,6 +12,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use PhpParser\Node\Stmt\Return_;
 
 class PengajuanSuratController extends Controller
 {
@@ -80,15 +81,17 @@ class PengajuanSuratController extends Controller
         $user = User::where('nik', $pengajuan->nik)->first();
 
         $details = DataPengajuan::where('pengajuan_id', $pengajuan->id)->get();
-
-        dd($details);
+        // dd($pengajuan);
 
         $data = [
             'pengajuan' => $pengajuan,
-            'user' => $user
+            'user' => $user,
+            'detail' => $details
         ];
 
-        dd($data);
+
+
+        return view('backend.pengajuan.detailpengajuan', $data);
     }
 
 
@@ -132,32 +135,69 @@ class PengajuanSuratController extends Controller
     }
 
 
-    public function approve($id)
+    public function approve(Request $request, $id)
     {
+        $request->validate([
+            'keterangan' => 'nullable|string|max:255',
+        ]);
+
+
         $pengajuan = PengajuanSurat::where('id', $id)->first();
 
         if (!$pengajuan) {
-            return redirect()->route('pengajuansurat')->with('error', 'Pengajuan tidak ditemukan.');
+            return redirect()->route('pengajuan.diproses')->with('error', 'Pengajuan tidak ditemukan.');
         }
 
-        $pengajuan->status = 'disetujui';
-        $pengajuan->save();
+        $data = [
+            'status' => 'diproses',
+            'keterangan' => $request->keterangan,
+        ];
 
-        return redirect()->route('pengajuansurat')->with('success' . 'Pengajuan Berhasil Disetujui');
+
+        $pengajuan->update($data);
+
+
+        return redirect()->route('pengajuan.disetujui')->with('success' . 'Pengajuan Berhasil Disetujui');
     }
 
-    public function rejected($id)
+    public function rejected(Request $request, $id)
+    {
+        $request->validate([
+            'keterangan' => 'nullable|string|max:255',
+        ]);
+
+        $pengajuan = PengajuanSurat::where('id', $id)->first();
+
+        if (!$pengajuan) {
+            return redirect()->route('pengajuan.diproses')->with('error', 'Pengajuan tidak ditemukan.');
+        }
+
+        $data = [
+            'status' => 'ditolak',
+            'keterangan' => $request->keterangan,
+        ];
+
+        $pengajuan->update($data);
+
+        return redirect()->route('pengajuan.ditolak')->with('success' . 'Pengajuan Berhasil Ditolak');
+    }
+
+    public function selesai($id)
     {
         $pengajuan = PengajuanSurat::where('id', $id)->first();
 
         if (!$pengajuan) {
-            return redirect()->route('pengajuansurat')->with('error', 'Pengajuan tidak ditemukan.');
+            return redirect()->route('pengajuan.diproses')->with('error', 'Pengajuan tidak ditemukan.');
         }
 
-        $pengajuan->status = 'ditolak';
-        $pengajuan->save();
+        $data = [
+            'status' => 'selesai',
+        ];
 
-        return redirect()->route('pengajuansurat')->with('success' . 'Pengajuan Berhasil Ditolak');
+
+        $pengajuan->update($data);
+
+        return redirect()->route('pengajuan.disetujui')->with('success' . 'Pengajuan Selesai');
     }
 
 
@@ -287,5 +327,68 @@ class PengajuanSuratController extends Controller
         ];
 
         return view('profile.riwayat', $data);
+    }
+
+    public function diproses(Request $request)
+    {
+        $search = $request->input('search');
+
+        $pengajuansurats = PengajuanSurat::where('status', 'diajukan')->when($search, function ($query, $search) {
+            $query->where('nama', 'like', "%{$search}%")
+                ->orWhere('jenis_surat', 'like', "%{$search}%");
+        })
+            ->orderBy('updated_at', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->paginate(6)->withQueryString();
+
+        $data = [
+            'pengajuansurat' => $pengajuansurats,
+
+        ];
+
+        return view('backend.pengajuan.pengajuandiproses', $data);
+    }
+
+    public function disetujui(Request $request)
+    {
+        $search = $request->input('search');
+
+        $pengajuansurats = PengajuanSurat::where(function ($query) {
+            $query->where('status', 'diproses')
+                ->orWhere('status', 'selesai');
+        })
+            ->when($search, function ($query, $search) {
+                $query->where('nama', 'like', "%{$search}%")
+                    ->orWhere('jenis_surat', 'like', "%{$search}%");
+            })
+            ->orderBy('updated_at', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->paginate(6)->withQueryString();
+
+        $data = [
+            'pengajuansurat' => $pengajuansurats,
+        ];
+
+        return view('backend.pengajuan.pengajuandisetujui', $data);
+    }
+    public function ditolak(Request $request)
+    {
+        $search = $request->input('search');
+
+        // Ambil data dengan status "ditolak"
+        $pengajuansurats = PengajuanSurat::where('status', 'ditolak')
+            ->when($search, function ($query, $search) {
+                $query->where('nama', 'like', "%{$search}%")
+                    ->orWhere('jenis_surat', 'like', "%{$search}%");
+            })
+            ->orderBy('updated_at', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->paginate(6)->withQueryString();
+
+        $data = [
+            'pengajuansurat' => $pengajuansurats,
+        ];
+
+        return view('backend.pengajuan.pengajuanditolak', $data);
     }
 }

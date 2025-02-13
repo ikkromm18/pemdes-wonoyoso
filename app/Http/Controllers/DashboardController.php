@@ -15,6 +15,11 @@ class DashboardController extends Controller
     {
         $jumlahpengajuan = PengajuanSurat::count();
 
+        $jumlahpengajuanperluproses = PengajuanSurat::where('status', 'diajukan')->count();
+
+        $jumlahpengajuanselesai = PengajuanSurat::where('status', 'selesai')->count();
+
+
         $jumlahuser = User::where('role', 'User')->count();
 
         $jumlahjenissurat = JenisSurat::count();
@@ -22,7 +27,9 @@ class DashboardController extends Controller
         $data = [
             'jumlahpengajuan' => $jumlahpengajuan,
             'jumlahuser' => $jumlahuser,
-            'jumlahjenissurat' => $jumlahjenissurat
+            'jumlahjenissurat' => $jumlahjenissurat,
+            'jumlahperluproses' => $jumlahpengajuanperluproses,
+            'jumlahselesai' => $jumlahpengajuanselesai
         ];
 
         return view('backend.dashboard', $data);
@@ -34,6 +41,10 @@ class DashboardController extends Controller
         $tahun = $request->query('tahun'); // Format: 2024, 2025, dll.
 
         $data = JenisSurat::withCount(['pengajuanSurats as jumlah_pengajuan' => function ($query) use ($bulan, $tahun) {
+            // Filter hanya pengajuan dengan status 'selesai'
+            $query->where('status', 'selesai');
+
+            // Filter berdasarkan bulan dan tahun jika ada
             if ($bulan && $tahun) {
                 $query->whereYear('created_at', $tahun)->whereMonth('created_at', $bulan);
             } elseif ($tahun) {

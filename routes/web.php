@@ -80,7 +80,9 @@ Route::middleware(['role:Admin'])->group(function () {
     Route::get('/pengajuan', [PengajuanSuratController::class, 'index'])->name('pengajuansurat');
     Route::get('/pengajuan/{id}', [PengajuanSuratController::class, 'show'])->name('pengajuan.show');
     Route::get('/pengajuandetail/{id}', [PengajuanSuratController::class, 'detail'])->name('pengajuan.detail');
-
+    Route::get('/pengajuandiproses', [PengajuanSuratController::class, 'diproses'])->name('pengajuan.diproses');
+    Route::get('/pengajuandisetujui', [PengajuanSuratController::class, 'disetujui'])->name('pengajuan.disetujui');
+    Route::get('/pengajuanditolak', [PengajuanSuratController::class, 'ditolak'])->name('pengajuan.ditolak');
 
 
 
@@ -88,6 +90,7 @@ Route::middleware(['role:Admin'])->group(function () {
     Route::get('/pengajuan/{id}/unduh', [PengajuanSuratController::class, 'unduh'])->name('pengajuan.unduh');
     Route::put('/pengajuan/updatestatus/{id?}', [PengajuanSuratController::class, 'approve'])->name('setuju');
     Route::put('/pengajuan/tolak/{id?}', [PengajuanSuratController::class, 'rejected'])->name('menolak');
+    Route::put('/pengajuan/selesai/{id?}', [PengajuanSuratController::class, 'selesai'])->name('selesai');
 
     Route::patch('/pengajuan/{id}/approve', [PengajuanSuratController::class, 'approve'])->name('pengajuan.approve');
     Route::patch('/pengajuan/{id}/rejected', [PengajuanSuratController::class, 'rejected'])->name('pengajuan.rejected');

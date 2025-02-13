@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email', 100);
             $table->string('alamat', 250);
             $table->foreignId('jenis_surat_id')->constrained('jenis_surats')->onDelete('cascade');
-            $table->enum('status', ['diajukan', 'disetujui', 'ditolak', 'dicetak', 'selesai'])->default('diajukan');
+            $table->enum('status', ['diajukan', 'diproses', 'ditolak', 'selesai'])->default('diajukan');
             $table->string('keterangan')->nullable();
             $table->timestamps();
         });
