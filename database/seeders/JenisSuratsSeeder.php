@@ -70,10 +70,6 @@ class JenisSuratsSeeder extends Seeder
             ],
             // 14
             [
-                'nama_jenis' => 'Surat Pembuatan KTP',
-            ],
-            // 15
-            [
                 'nama_jenis' => 'Surat Penghasilan Orang Tua',
             ],
 

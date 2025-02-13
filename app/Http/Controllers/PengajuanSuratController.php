@@ -6,6 +6,8 @@ use App\Mail\PengajuanDiajukanMail;
 use App\Models\DataPengajuan;
 use App\Models\PengajuanSurat;
 use App\Models\User;
+use App\Models\FieldSurat;
+
 use App\Notifications\NewPengajuan;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -95,12 +97,49 @@ class PengajuanSuratController extends Controller
     }
 
 
+    // public function store(Request $request)
+    // {
+
+    //     $request->validate([
+    //         'jenis_surat_id' => 'required',
+    //         'fields' => 'required|array'
+    //     ]);
+
+    //     $user = $request->user();
+
+    //     if (empty($user->nik) || empty($user->alamat)) {
+    //         return redirect()->route('profile.edit')->with('error', 'Silakan lengkapi data profil Anda terlebih dahulu sebelum membuat pengajuan.');
+    //     }
+
+    //     $pengajuan = PengajuanSurat::create([
+    //         'nik' => $user->nik,
+    //         'nama' => $user->name,
+    //         'email' => $user->email,
+    //         'alamat' => $user->alamat,
+    //         'jenis_surat_id' => $request->jenis_surat_id,
+    //         'status' => 'diajukan',
+    //     ]);
+
+
+
+    //     foreach ($request->fields as $fieldId => $value) {
+    //         DataPengajuan::create([
+    //             'pengajuan_id' => $pengajuan->id,
+    //             'field_id' => $fieldId,
+    //             'nilai' => $value,
+    //         ]);
+    //     }
+
+
+    //     // Mail::to($pengajuan->email)->send(new PengajuanDiajukanMail($pengajuan));
+
+    //     return redirect()->route('layanan')->with('success', 'Pengajuan berhasil diajukan!');
+    // }
     public function store(Request $request)
     {
-
         $request->validate([
             'jenis_surat_id' => 'required',
-            'fields' => 'required|array'
+            'fields' => 'required|array',
         ]);
 
         $user = $request->user();
@@ -118,18 +157,39 @@ class PengajuanSuratController extends Controller
             'status' => 'diajukan',
         ]);
 
-
-
         foreach ($request->fields as $fieldId => $value) {
+            $field = FieldSurat::find($fieldId);
+
+            if ($field && $field->tipe_field === 'file' && $request->hasFile("fields.$fieldId")) {
+                $file = $request->file("fields.$fieldId");
+
+                // Hapus file lama jika ada
+                $existingData = DataPengajuan::where('pengajuan_id', $pengajuan->id)
+                    ->where('field_id', $fieldId)
+                    ->first();
+
+                if ($existingData && !empty($existingData->nilai)) {
+                    $oldFilePath = public_path(str_replace(url('/'), '', $existingData->nilai));
+                    if (file_exists($oldFilePath)) {
+                        unlink($oldFilePath);
+                    }
+                }
+
+                // Simpan file baru
+                $fileName = uniqid() . '.' . $file->extension();
+                $filePath = 'uploaded/foto_pengajuan/' . $fileName;
+                $file->move(public_path('uploaded/foto_pengajuan'), $fileName);
+
+                // Simpan URL file di database
+                $value = url($filePath);
+            }
+
             DataPengajuan::create([
                 'pengajuan_id' => $pengajuan->id,
                 'field_id' => $fieldId,
                 'nilai' => $value,
             ]);
         }
-
-
-        // Mail::to($pengajuan->email)->send(new PengajuanDiajukanMail($pengajuan));
 
         return redirect()->route('layanan')->with('success', 'Pengajuan berhasil diajukan!');
     }

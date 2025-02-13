@@ -61,7 +61,7 @@ class FielsSuratsSeeder extends Seeder
                 'nama_field' => 'Penyebab Kematian',
                 'tipe_field' => 'text',
             ],
-            //2 
+            //2 Pengantar Umum
             [
                 'jenis_surat_id' => 2,
                 'nama_field' => 'Nama Lengkap',
@@ -96,6 +96,11 @@ class FielsSuratsSeeder extends Seeder
                 'jenis_surat_id' => 2,
                 'nama_field' => 'Keperluan',
                 'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 2,
+                'nama_field' => 'Foto Pengantar RT',
+                'tipe_field' => 'file',
             ],
             //3 SKTM
             [
@@ -137,6 +142,16 @@ class FielsSuratsSeeder extends Seeder
                 'jenis_surat_id' => 3,
                 'nama_field' => 'Keperluan Surat',
                 'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 3,
+                'nama_field' => 'Foto Pengantar RT',
+                'tipe_field' => 'file',
+            ],
+            [
+                'jenis_surat_id' => 3,
+                'nama_field' => 'Foto Slip Gaji',
+                'tipe_field' => 'file',
             ],
 
             // Surat Keterangan Lahir
@@ -190,6 +205,11 @@ class FielsSuratsSeeder extends Seeder
                 'nama_field' => 'NIK Ibu',
                 'tipe_field' => 'number',
             ],
+            [
+                'jenis_surat_id' => 4,
+                'nama_field' => 'Foto Surat Keterangan Lahir dari Dokter',
+                'tipe_field' => 'file',
+            ],
             //Surat Keterangan Usaha 
             [
                 'jenis_surat_id' => 5,
@@ -236,6 +256,11 @@ class FielsSuratsSeeder extends Seeder
                 'nama_field' => 'Keperluan',
                 'tipe_field' => 'text',
             ],
+            [
+                'jenis_surat_id' => 5,
+                'nama_field' => 'Foto Surat Pengantar RT',
+                'tipe_field' => 'file',
+            ],
 
             // Surat Keternagan Domisili
             [
@@ -277,6 +302,11 @@ class FielsSuratsSeeder extends Seeder
                 'jenis_surat_id' => 6,
                 'nama_field' => 'Keperluan',
                 'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 6,
+                'nama_field' => 'Foto Surat Pengantar RT',
+                'tipe_field' => 'file',
             ],
 
             //Surat Keterangan Ahli Waris
@@ -381,6 +411,11 @@ class FielsSuratsSeeder extends Seeder
                 'nama_field' => 'Acara',
                 'tipe_field' => 'text',
             ],
+            [
+                'jenis_surat_id' => 8,
+                'nama_field' => 'Foto Pengantar RT',
+                'tipe_field' => 'file',
+            ],
             // Surat Keterangan Pindah Penduduk
             [
                 'jenis_surat_id' => 9,
@@ -422,6 +457,12 @@ class FielsSuratsSeeder extends Seeder
                 'nama_field' => 'Jumlah Anggota Keluarga',
                 'tipe_field' => 'number',
             ],
+            [
+                'jenis_surat_id' => 9,
+                'nama_field' => 'Foto Pengantar RT',
+                'tipe_field' => 'file',
+            ],
+
             // Pemgantar Keterangan Kehilangan
             [
                 'jenis_surat_id' => 10,
@@ -525,6 +566,11 @@ class FielsSuratsSeeder extends Seeder
                 'nama_field' => 'Tempat Usaha',
                 'tipe_field' => 'text',
             ],
+            [
+                'jenis_surat_id' => 11,
+                'nama_field' => 'Foto Pengantar RT',
+                'tipe_field' => 'file',
+            ],
 
             // Surat Pengantar IMB
             [
@@ -617,6 +663,11 @@ class FielsSuratsSeeder extends Seeder
                 'jenis_surat_id' => 13,
                 'nama_field' => 'Alamat',
                 'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 13,
+                'nama_field' => 'Foto Pengantar RT',
+                'tipe_field' => 'file',
             ],
         ];
 

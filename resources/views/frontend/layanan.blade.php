@@ -8,12 +8,14 @@
             <div class="bg-white shadow-lg w-full mt-16 rounded-sm p-8">
                 <h1 class="text-center font-semibold text-2xl mb-8">Form Pengajuan Surat</h1>
 
-                <form class="max-w-xl mx-auto" action="{{ route('pengajuan.store') }}" method="POST">
+                <form class="max-w-xl mx-auto" action="{{ route('pengajuan.store') }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
 
                     <!-- Dropdown Jenis Surat -->
                     <div class="relative z-0 w-full mb-5 group">
-                        <label for="jenis_surat_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis
+                        <label for="jenis_surat_id"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis
                             Surat</label>
                         <select id="jenis_surat_id" name="jenis_surat_id"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -29,6 +31,7 @@
 
                     <!-- Tombol Submit dengan Modal -->
                     <button data-modal-target="popup-modal-layanan" data-modal-toggle="popup-modal-layanan"
+                        dusk="submit-pengajuan"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
                         type="button">
                         Submit
@@ -57,7 +60,7 @@
                                     </svg>
                                     <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Apakah Data Yang
                                         Anda Isi Sudah Benar?</h3>
-                                    <button type="submit"
+                                    <button type="submit" dusk="submit-btn"
                                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
                                         Submit
                                     </button>
