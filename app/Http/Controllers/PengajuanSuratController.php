@@ -369,7 +369,7 @@ class PengajuanSuratController extends Controller
         }
 
 
-        return "Halaman Cetak Belum Dibuat";
+        return view('pdf.template', $data);
     }
 
     public function history(Request $request)

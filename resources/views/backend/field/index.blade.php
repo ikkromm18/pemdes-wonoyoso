@@ -10,6 +10,8 @@
 
         @include('components.alert')
 
+        <a href="{{ route('field.create') }}" class="btn bg-slate-700 text-white mb-5">+ Tambah Field</a>
+
         <x-search route="{{ route('field') }}" name='search' placeholder="Cari Data Berdasarkan Nama Field" />
 
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mb-2 mt-4">
