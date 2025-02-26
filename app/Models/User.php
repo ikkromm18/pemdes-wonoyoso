@@ -25,8 +25,13 @@ class User extends Authenticatable
         'foto_ktp',
         'foto_kk',
         'nik',
-        'alamat',
-        'role'
+        'nomor_hp',
+        'alamat_utama',
+        'alamat_kedua',
+        'tempat_lahir',
+        'tgl_lahir',
+        'role',
+        'is_active'
     ];
 
     /**
