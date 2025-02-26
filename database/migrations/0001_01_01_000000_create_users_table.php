@@ -20,8 +20,13 @@ return new class extends Migration
             $table->string('foto_ktp')->nullable();
             $table->string('foto_kk')->nullable();
             $table->string('nik', 16)->nullable();
-            $table->string('alamat')->nullable();
+            $table->string('alamat_utama')->nullable();
+            $table->string('alamat_kedua')->nullable();
+            $table->string('nomor_hp')->nullable();
+            $table->string('tempat_lahir')->nullable();
+            $table->date('tgl_lahir')->nullable();
             $table->enum('role', ['User', 'Admin'])->default('User');
+            $table->boolean('is_active')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

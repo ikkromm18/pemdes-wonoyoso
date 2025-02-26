@@ -51,17 +51,20 @@ class RegisteredUserController extends Controller
     public function daftar(Request $request): RedirectResponse
     {
         // Validasi data input termasuk file upload
-        $cek =  $request->validate([
+        $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'nik' => ['nullable', 'regex:/^\d{16}$/'], // Validasi NIK harus 16 digit angka
-            'alamat' => ['nullable', 'string', 'max:255'],
+            'nomor_hp' => ['nullable'],
+            'tempat_lahir' => ['required', 'string', 'max:255'],
+            'tgl_lahir' => ['nullable', 'date'],
+            'alamat_utama' => ['nullable', 'string', 'max:255'],
+            'alamat_kedua' => ['nullable', 'string', 'max:255'],
             'foto_ktp' => ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:2048'], // Max 2MB
             'foto_kk' => ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:2048'],  // Max 2MB
         ]);
 
-        // dd($cek);
         // Persiapkan nama file untuk foto KTP dan KK
         $fotoKTP = null;
         if ($request->hasFile('foto_ktp')) {
@@ -83,7 +86,11 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'nik' => $request->nik,
-            'alamat' => $request->alamat,
+            'nomor_hp' => $request->nomor_hp,
+            'tempat_lahir' => $request->tempat_lahir,
+            'tgl_lahir' => $request->tgl_lahir,
+            'alamat_utama' => $request->alamat_utama,
+            'alamat_kedua' => $request->alamat_kedua,
             'foto_ktp' => $fotoKTP,
             'foto_kk' => $fotoKK,
         ]);
