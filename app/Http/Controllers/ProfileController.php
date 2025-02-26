@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rules;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -20,27 +22,45 @@ class ProfileController extends Controller
 
         $user = $request->user();
 
-        dd($user);
+
         return view('profile.edit', [
-            'user' => $request->user(),
+            'user' => $user,
         ]);
     }
 
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(Request $request): RedirectResponse
     {
         // $request->user()->fill($request->validated());
+
+
         $user = $request->user();
 
-        $validatedData = $request->validated();
+
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255'],
+            'nik' => ['nullable', 'regex:/^\d{16}$/'], // Validasi NIK harus 16 digit angka
+            'nomor_hp' => ['nullable'],
+            'tempat_lahir' => ['required', 'string', 'max:255'],
+            'tgl_lahir' => ['nullable', 'date'],
+            'alamat_utama' => ['nullable', 'string', 'max:255'],
+            'alamat_kedua' => ['nullable', 'string', 'max:255'],
+            'foto_ktp' => ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:2048'], // Max 2MB
+            'foto_kk' => ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:2048'],  // Max 2MB
+        ]);
 
         // update
-        $user->name = $validatedData['name'];
-        $user->email = $validatedData['email'];
-        $user->alamat = $validatedData['alamat'];
-        $user->nik = $validatedData['nik'];
+        $user->name = $request['name'];
+        $user->email = $request['email'];
+        $user->nik = $request['nik'];
+        $user->nomor_hp = $request['nomor_hp'];
+        $user->tempat_lahir = $request['tempat_lahir'];
+        $user->tgl_lahir = $request['tgl_lahir'];
+        $user->alamat_utama = $request['alamat_utama'];
+        $user->alamat_kedua = $request['alamat_kedua'];
 
         if ($request->hasFile('foto_ktp')) {
 
