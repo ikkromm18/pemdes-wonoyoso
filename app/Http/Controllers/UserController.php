@@ -130,4 +130,18 @@ class UserController extends Controller
 
         return redirect()->route('user.admin')->with('success', 'Password berhasil diperbarui.');
     }
+
+    public function verifikasi(Request $request, $id)
+    {
+
+        $user = User::findOrFail($id);
+
+        $data = [
+            'is_active' => true
+        ];
+
+        $user->update($data);
+
+        return redirect()->route('user.index')->with('success', 'User Berhasil Diverifikasi');
+    }
 }

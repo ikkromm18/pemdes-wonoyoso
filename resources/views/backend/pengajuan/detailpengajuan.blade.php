@@ -2,14 +2,14 @@
 @section('title', 'Detail Pengajuan')
 @section('admin')
 
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-2">
+    <div class="relative p-2 overflow-x-auto shadow-md sm:rounded-lg">
 
         <x-breadcrumb title="Detail Data Pengajuan" dashboard="Dashboard" pagename="Pengajuan" />
 
-        <div class="flex justify-between items-center mb-5 p-3">
+        <div class="flex items-center justify-between p-3 mb-5">
             <!-- Tombol Kembali (Start) -->
             <div>
-                <a href="{{ route('pengajuan.diproses') }}" class="btn bg-slate-700 text-white">
+                <a href="{{ route('pengajuan.diproses') }}" class="text-white btn bg-slate-700">
                     Kembali
                 </a>
             </div>
@@ -18,12 +18,12 @@
             <div class="flex space-x-3">
 
                 <button data-modal-target="popup-modal-setuju" data-modal-toggle="popup-modal-setuju"
-                    class="btn bg-blue-700 text-white" type="button">
+                    class="text-white bg-blue-700 btn" type="button">
                     Setuju
                 </button>
 
                 <button data-modal-target="popup-modal-menolak" data-modal-toggle="popup-modal-menolak"
-                    class="btn bg-red-700 text-white" type="button">
+                    class="text-white bg-red-700 btn" type="button">
                     Tolak
                 </button>
 
@@ -38,7 +38,7 @@
 
         <div id="popup-modal-setuju" tabindex="-1"
             class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
-            <div class="relative p-4 w-full max-w-md max-h-full">
+            <div class="relative w-full max-w-md max-h-full p-4">
                 <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
                     <button type="button"
                         class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
@@ -50,7 +50,7 @@
                         </svg>
                         <span class="sr-only">Close modal</span>
                     </button>
-                    <div class="p-4 md:p-5 text-center">
+                    <div class="p-4 text-center md:p-5">
 
                         <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Keterangan Tambahan</h3>
 
@@ -64,7 +64,7 @@
 
                             <div class="mt-4">
 
-                                <button type="submit" class="btn bg-blue-700 text-white" dusk="setuju-button">
+                                <button type="submit" class="text-white bg-blue-700 btn" dusk="setuju-button">
                                     Setuju
                                 </button>
 
@@ -86,7 +86,7 @@
 
         <div id="popup-modal-menolak" tabindex="-1"
             class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ">
-            <div class="relative p-4 w-full max-w-md max-h-full">
+            <div class="relative w-full max-w-md max-h-full p-4">
                 <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
                     <button type="button"
                         class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
@@ -98,7 +98,7 @@
                         </svg>
                         <span class="sr-only">Close modal</span>
                     </button>
-                    <div class="p-4 md:p-5 text-center">
+                    <div class="p-4 text-center md:p-5">
 
                         <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Alasan Ditolak</h3>
 
@@ -112,7 +112,7 @@
 
                             <div class="mt-4">
 
-                                <button type="submit" class="btn bg-red-700 text-white">
+                                <button type="submit" class="text-white bg-red-700 btn">
                                     Tolak
                                 </button>
 
@@ -131,7 +131,7 @@
         {{-- Akhir Modal Tolak --}}
 
         <!-- Grid Container -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-3">
+        <div class="grid grid-cols-1 gap-4 p-3 md:grid-cols-2">
             <!-- Kolom Kiri -->
             <div class="space-y-4">
                 <div>
@@ -154,7 +154,7 @@
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat</label>
-                    <input value="{{ $user->alamat }}"
+                    <input value="{{ $user->alamat_utama }}"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         disabled />
                 </div>
@@ -188,7 +188,7 @@
 
                         @if (filter_var($d->nilai, FILTER_VALIDATE_URL) && preg_match('/\.(jpg|jpeg|png|gif|webp)$/i', $d->nilai))
                             <!-- Jika nilai adalah URL dan format file gambar -->
-                            <img src="{{ $d->nilai }}" alt="Foto Pengajuan" class="w-64 rounded-lg border">
+                            <img src="{{ $d->nilai }}" alt="Foto Pengajuan" class="w-64 border rounded-lg">
                         @else
                             <!-- Jika nilai bukan file gambar, tampilkan dalam input -->
                             <input value="{{ $d->nilai }}"
@@ -204,7 +204,7 @@
         </div>
 
         <!-- Grid untuk Foto -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-3">
+        <div class="grid grid-cols-1 gap-4 p-3 md:grid-cols-2">
             <div>
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto KTP</label>
                 <div class="w-full">

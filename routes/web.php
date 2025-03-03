@@ -101,6 +101,8 @@ Route::middleware(['role:Admin'])->group(function () {
     Route::get('/useradmin', [UserController::class, 'indexAdmin'])->name('user.admin');
     Route::get('/editpassword/{id}', [UserController::class, 'editPassword'])->name('user.editpassword');
     Route::post('/updatepassword/{id}', [UserController::class, 'updatePassword'])->name('user.updatepassword');
+
+    Route::put('/diverifikasi/{id}', [UserController::class, 'verifikasi'])->name('user.verifikasi');
 });
 
 require __DIR__ . '/auth.php';
