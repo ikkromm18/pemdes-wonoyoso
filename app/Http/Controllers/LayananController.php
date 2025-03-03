@@ -14,11 +14,8 @@ class LayananController extends Controller
         $user = $request->user();
 
         if (!$user->is_active) {
-            $pesan = 'User Belum Diaktifkan';
 
-            dd($pesan);
-
-            return redirect()->route('layanan')->with('error', 'Akun Anda belum diaktifkan oleh admin.');
+            return view('frontend.un-active');
         }
 
 

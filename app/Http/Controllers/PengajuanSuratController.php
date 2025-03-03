@@ -144,7 +144,7 @@ class PengajuanSuratController extends Controller
 
         $user = $request->user();
 
-        if (empty($user->nik) || empty($user->alamat)) {
+        if (empty($user->nik) || empty($user->alamat_utama)) {
             return redirect()->route('profile.edit')->with('error', 'Silakan lengkapi data profil Anda terlebih dahulu sebelum membuat pengajuan.');
         }
 
@@ -152,7 +152,7 @@ class PengajuanSuratController extends Controller
             'nik' => $user->nik,
             'nama' => $user->name,
             'email' => $user->email,
-            'alamat' => $user->alamat,
+            'alamat' => $user->alamat_utama,
             'jenis_surat_id' => $request->jenis_surat_id,
             'status' => 'diajukan',
         ]);
