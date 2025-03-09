@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
+use Illuminate\Auth\Events\Registered;
 
 class UserController extends Controller
 {
@@ -54,9 +56,37 @@ class UserController extends Controller
         return view('backend.user.index-admin', $data);
     }
 
-    public function create() {}
+    public function create()
+    {
+        return view('backend.user.add-admin');
+    }
 
-    public function store(Request $request) {}
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'nomor_hp' => ['nullable'],
+
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'nik' => $request->nik,
+            'nomor_hp' => $request->nomor_hp,
+            'role' => 'Admin'
+        ]);
+
+        event(new Registered($user));
+
+
+        return redirect()->route('user.admin')->with('success', 'Berhasil Menambahkan Admin');
+
+        return "Berhasil Menambahkan";
+    }
 
     public function show($id)
     {
