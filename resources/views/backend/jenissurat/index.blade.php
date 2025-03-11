@@ -4,7 +4,7 @@
 
 
 
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-2">
+    <div class="relative p-2 overflow-x-auto shadow-md sm:rounded-lg">
 
         <x-breadcrumb title="Jenis Surat" dashboard="Dashboard" pagename="Jenis Surat" />
 
@@ -12,12 +12,12 @@
 
         <div class="p-4 bg-white dark:bg-gray-900">
 
-            <a href="{{ route('jenissurat.create') }}" class="btn bg-slate-700 text-white mb-5">+ Tambah Jenis Surat</a>
+            <a href="{{ route('jenissurat.create') }}" class="mb-5 text-white btn bg-slate-700">+ Tambah Jenis Surat</a>
 
             <x-search route="{{ route('jenissurat') }}" name='search' placeholder="Cari Data Jenis Surat" />
 
         </div>
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mb-2">
+        <table class="w-full mb-2 text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
 
@@ -55,7 +55,7 @@
                             {{ $js->id }}
                         </td> --}}
 
-                        <td class="px-6 py-4 flex gap-4 md:gap-8">
+                        <td class="flex gap-4 px-6 py-4 md:gap-8">
                             <a href="{{ route('jenissurat.edit', $js->id) }}"
                                 class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                             <form action="{{ route('jenissurat.delete', $js->id) }}" method="POST">

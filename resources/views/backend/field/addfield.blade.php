@@ -9,6 +9,7 @@
 
         <x-bread-crumb2 title="Tambah Field" dashboard="Dashboard" pagename="Field" subpagename="Tambah Field" />
 
+        @include('components.alert')
 
 
         <form class="p-4 md:p-5" action="{{ route('field.store') }}" method="POST">
@@ -16,7 +17,7 @@
             @method('POST')
 
 
-            <div class="grid gap-4 mb-4 md:grid-cols-4 grid-cols-1">
+            <div class="grid grid-cols-1 gap-4 mb-4 md:grid-cols-4">
                 <div class="col-span-2">
                     <label for="nama_field" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         Jenis Surat</label>
@@ -33,7 +34,7 @@
                 </div>
             </div>
 
-            <div class="grid gap-4 mb-4 md:grid-cols-4 grid-cols-1">
+            <div class="grid grid-cols-1 gap-4 mb-4 md:grid-cols-4">
                 <div class="col-span-2">
                     <label for="nama_field" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         Nama Field</label>
@@ -43,7 +44,7 @@
                 </div>
             </div>
 
-            <div class="grid gap-4 mb-4 md:grid-cols-4 grid-cols-1">
+            <div class="grid grid-cols-1 gap-4 mb-4 md:grid-cols-4">
                 <div class="col-span-2">
                     <label for="tipe_field" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         Tipe Field</label>
@@ -61,7 +62,7 @@
                 </div>
             </div>
 
-            <div class="grid gap-4 mb-4 md:grid-cols-4 grid-cols-1">
+            <div class="grid grid-cols-1 gap-4 mb-4 md:grid-cols-4">
                 <div class="col-span-2">
                     <label for="is_required" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         Wajib Diisi</label>
@@ -74,7 +75,7 @@
                 </div>
             </div>
 
-            <div class="flex justify-start mt-6 gap-2">
+            <div class="flex justify-start gap-2 mt-6">
 
 
                 <x-primary-button href="" class="bg-primary">

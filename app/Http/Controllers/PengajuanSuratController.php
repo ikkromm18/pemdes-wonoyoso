@@ -97,44 +97,6 @@ class PengajuanSuratController extends Controller
     }
 
 
-    // public function store(Request $request)
-    // {
-
-    //     $request->validate([
-    //         'jenis_surat_id' => 'required',
-    //         'fields' => 'required|array'
-    //     ]);
-
-    //     $user = $request->user();
-
-    //     if (empty($user->nik) || empty($user->alamat)) {
-    //         return redirect()->route('profile.edit')->with('error', 'Silakan lengkapi data profil Anda terlebih dahulu sebelum membuat pengajuan.');
-    //     }
-
-    //     $pengajuan = PengajuanSurat::create([
-    //         'nik' => $user->nik,
-    //         'nama' => $user->name,
-    //         'email' => $user->email,
-    //         'alamat' => $user->alamat,
-    //         'jenis_surat_id' => $request->jenis_surat_id,
-    //         'status' => 'diajukan',
-    //     ]);
-
-
-
-    //     foreach ($request->fields as $fieldId => $value) {
-    //         DataPengajuan::create([
-    //             'pengajuan_id' => $pengajuan->id,
-    //             'field_id' => $fieldId,
-    //             'nilai' => $value,
-    //         ]);
-    //     }
-
-
-    //     // Mail::to($pengajuan->email)->send(new PengajuanDiajukanMail($pengajuan));
-
-    //     return redirect()->route('layanan')->with('success', 'Pengajuan berhasil diajukan!');
-    // }
     public function store(Request $request)
     {
         $request->validate([

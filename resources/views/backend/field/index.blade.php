@@ -4,17 +4,17 @@
 
 
 
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-2">
+    <div class="relative p-2 overflow-x-auto shadow-md sm:rounded-lg">
 
         <x-breadcrumb title="Data Field Surat" dashboard="Dashboard" pagename="Field" />
 
         @include('components.alert')
 
-        <a href="{{ route('field.create') }}" class="btn bg-slate-700 text-white mb-5">+ Tambah Field</a>
+        <a href="{{ route('field.create') }}" class="mb-5 text-white btn bg-slate-700">+ Tambah Field</a>
 
         <x-search route="{{ route('field') }}" name='search' placeholder="Cari Data Berdasarkan Nama Field" />
 
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mb-2 mt-4">
+        <table class="w-full mt-4 mb-2 text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
 
@@ -57,7 +57,7 @@
                             {{ $f->is_required == 1 ? 'Ya' : 'Tidak' }}
                         </td>
 
-                        <td class="px-6 py-4 flex gap-4 md:gap-8">
+                        <td class="flex gap-4 px-6 py-4 md:gap-8">
                             <a href="{{ route('field.edit', $f->id) }}"
                                 class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                             <form action="{{ route('field.delete', $f->id) }}" method="POST">

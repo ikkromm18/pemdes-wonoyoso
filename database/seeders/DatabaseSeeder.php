@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@example.com',
             'password' => bcrypt('password'), // Pastikan menggunakan hash
             'role' => 'Admin',
+            'nomor_hp' => '082134885973',
             'alamat_utama' => 'Alamat Admin',
             'created_at' => now(),
             'updated_at' => now(),
@@ -44,7 +45,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             JenisSuratsSeeder::class,
-            FielsSuratsSeeder::class
+            FielsSuratsSeeder::class,
+            SettingSeeder::class
         ]);
     }
 }

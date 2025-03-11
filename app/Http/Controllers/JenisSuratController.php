@@ -13,7 +13,6 @@ class JenisSuratController extends Controller
 
         $search = $request->input('search');
 
-        // $jenisSurats = JenisSurat::paginate(7)->withQueryString();
 
         $jenisSurats = JenisSurat::query()
             ->when($search, function ($query, $search) {
@@ -25,7 +24,6 @@ class JenisSuratController extends Controller
             'jenisSurats' => $jenisSurats
         ];
 
-        // dd($data);
 
         return view('backend.jenissurat.index', $data);
     }
@@ -43,7 +41,7 @@ class JenisSuratController extends Controller
 
         JenisSurat::create($request->all());
 
-        return redirect()->route('jenissurat')->with('success', 'Jenis Surat Berhasil Ditambahkan');
+        return redirect()->route('field.create')->with('success', 'Jenis Surat Berhasil Ditambahkan, Silahkan Tambahkan Field');
     }
 
     public function edit($id)
