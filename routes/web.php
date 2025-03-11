@@ -9,6 +9,7 @@ use App\Http\Controllers\JenisSuratController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\PengajuanSuratController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
 use App\Mail\PengajuanDiajukanMail;
 use Filament\Pages\Dashboard;
@@ -103,6 +104,9 @@ Route::middleware(['role:Admin'])->group(function () {
     Route::post('/updatepassword/{id}', [UserController::class, 'updatePassword'])->name('user.updatepassword');
 
     Route::put('/diverifikasi/{id}', [UserController::class, 'verifikasi'])->name('user.verifikasi');
+
+    Route::get('/setting', [SettingController::class, 'index'])->name('setting');
+    Route::put('/setting/{id?}', [SettingController::class, 'update'])->name('setting.update');
 });
 
 require __DIR__ . '/auth.php';

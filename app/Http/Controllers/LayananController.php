@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\FieldSurat;
 use App\Models\JenisSurat;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class LayananController extends Controller
@@ -15,7 +16,13 @@ class LayananController extends Controller
 
         if (!$user->is_active) {
 
-            return view('frontend.un-active');
+            $NomorAdmin = User::where('role', 'Admin')->first();
+
+            $data = [
+                'nomor_admin' => $NomorAdmin
+            ];
+
+            return view('frontend.un-active', $data);
         }
 
 

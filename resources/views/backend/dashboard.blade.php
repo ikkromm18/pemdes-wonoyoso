@@ -4,13 +4,13 @@
 
 
 
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-2">
+    <div class="relative p-2 overflow-x-auto shadow-md sm:rounded-lg">
 
         <x-breadcrumb title="Dashboard" dashboard="" pagename="" />
 
-        <div class="flex flex-wrap justify-center gap-3 text-gray-900 p-4 md:p-8">
+        <div class="flex flex-wrap justify-center gap-3 p-4 text-gray-900 md:p-8">
 
-            <div class="max-w-64 p-6 w-full border-2 border-gray-900 rounded-lg  flex justify-between items-center">
+            <div class="flex items-center justify-between w-full p-6 border-2 border-gray-900 rounded-lg max-w-64">
                 <div class="icons">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-10">
@@ -20,12 +20,12 @@
                 </div>
                 <div class="">
                     <h5 class="mb-2 text-xl font-bold tracking-tight ">Perlu Diproses</h5>
-                    <p class="font-semibold text-xl ">{{ $jumlahperluproses }}</p>
+                    <p class="text-xl font-semibold ">{{ $jumlahperluproses }}</p>
                 </div>
 
             </div>
 
-            <div class="max-w-64 p-6 w-full border-2 border-gray-900 rounded-lg  flex justify-between items-center">
+            <div class="flex items-center justify-between w-full p-6 border-2 border-gray-900 rounded-lg max-w-64">
                 <div class="icons">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-10">
@@ -35,12 +35,12 @@
                 </div>
                 <div class="">
                     <h5 class="mb-2 text-xl font-bold tracking-tight ">Pengajuan</h5>
-                    <p class="font-semibold text-xl ">{{ $jumlahselesai }}</p>
+                    <p class="text-xl font-semibold ">{{ $jumlahselesai }}</p>
                 </div>
 
             </div>
 
-            <div class="max-w-64 p-6 w-full border-2 border-gray-900 rounded-lg  flex justify-between items-center">
+            <div class="flex items-center justify-between w-full p-6 border-2 border-gray-900 rounded-lg max-w-64">
                 <div class="icons">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-10">
@@ -50,11 +50,11 @@
                 </div>
                 <div class="">
                     <h5 class="mb-2 text-xl font-bold tracking-tight ">Jumlah User</h5>
-                    <p class="font-semibold text-xl ">{{ $jumlahuser }}</p>
+                    <p class="text-xl font-semibold ">{{ $jumlahuser }}</p>
                 </div>
             </div>
 
-            <div class="max-w-64 p-6 w-full border-2 border-gray-900 rounded-lg  flex justify-between items-center">
+            <div class="flex items-center justify-between w-full p-6 border-2 border-gray-900 rounded-lg max-w-64">
                 <div class="icons">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-10">
@@ -64,18 +64,18 @@
                 </div>
                 <div class="">
                     <h5 class="mb-2 text-xl font-bold tracking-tight ">Jenis Surat</h5>
-                    <p class="font-semibold text-xl ">{{ $jumlahjenissurat }}</p>
+                    <p class="text-xl font-semibold ">{{ $jumlahjenissurat }}</p>
                 </div>
             </div>
         </div>
 
         <!-- Grafik -->
         <div class="w-full mt-8">
-            <h2 class="text-2xl font-bold mb-4">Grafik Pengajuan Per Jenis Surat</h2>
+            <h2 class="mb-4 text-2xl font-bold">Grafik Pengajuan Per Jenis Surat</h2>
 
             <!-- Filter -->
             <div class="flex flex-wrap gap-4 mb-6">
-                <select id="bulan" class="border rounded p-2">
+                <select id="bulan" class="p-2 border rounded">
                     <option value="">Pilih Bulan</option>
                     <option value="01">Januari</option>
                     <option value="02">Februari</option>
@@ -91,17 +91,17 @@
                     <option value="12">Desember</option>
                 </select>
 
-                <select id="tahun" class="border rounded p-2">
+                <select id="tahun" class="p-2 border rounded">
                     <option value="">Pilih Tahun</option>
                     @for ($i = 2020; $i <= date('Y'); $i++)
                         <option value="{{ $i }}">{{ $i }}</option>
                     @endfor
                 </select>
 
-                <button id="filter" class="bg-blue-500 text-white p-2 rounded">Tampilkan</button>
+                <button id="filter" class="p-2 text-white bg-blue-500 rounded">Tampilkan</button>
             </div>
 
-            <div class="relative h-96 w-full">
+            <div class="relative w-full h-96">
                 <canvas id="pengajuanChart"></canvas>
             </div>
         </div>

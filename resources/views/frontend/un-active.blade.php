@@ -10,7 +10,8 @@
                 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
                 Akun Belum Diaktivasi Oleh Admin</h1>
             <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-400">Jika Akun Belum
-                Diaktivasi Dalam Waktu Satu Hari Silahkan Hubungi Admin Melalui Nomor HP/WA. 082134885973</p>
+                Diaktivasi Dalam Waktu Satu Hari Silahkan Hubungi Admin Melalui Nomor HP/WA. {{ $nomor_admin->nomor_hp }}
+            </p>
             <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
 
                 <a href="{{ route('home') }}"
