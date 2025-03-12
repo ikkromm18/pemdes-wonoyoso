@@ -16,4 +16,10 @@ class BerandaController extends Controller
         ];
         return view('frontend.beranda', $data);
     }
+
+    public function pemberitahuan()
+    {
+
+        return view('frontend.notifikasi');
+    }
 }

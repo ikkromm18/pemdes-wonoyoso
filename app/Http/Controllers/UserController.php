@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\Auth\Events\Registered;
+use App\Notifications\UserStatusNotification;
 
 class UserController extends Controller
 {
@@ -171,6 +172,8 @@ class UserController extends Controller
         ];
 
         $user->update($data);
+
+        $user->notify(new UserStatusNotification($user, $request->is_active));
 
         return redirect()->route('user.index')->with('success', 'User Berhasil Diverifikasi');
     }

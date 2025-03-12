@@ -15,6 +15,9 @@ use App\Mail\PengajuanDiajukanMail;
 use Filament\Pages\Dashboard;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 
 
@@ -23,20 +26,32 @@ Route::get('/test', function () {
     return view('pdf.pengajuan');
 });
 
+Route::post('/notifications/mark-as-read/{id}', function (Request $request, $id) {
+    $notification = $request->user()->notifications()->where('id', $id)->first();
+
+    if ($notification) {
+        $notification->markAsRead();
+    }
+
+    return response()->json(['success' => true]);
+})->name('notifications.markAsRead');
+
+Route::get('/notifications', function () {
+    $notifications = Auth::user()->notifications;
+    return view('frontend.notifikasi', compact('notifications'));
+})->name('pemberitahuan');
+
+Route::post('/notifications/mark-all-read', function () {
+    Auth::user()->unreadNotifications->markAsRead();
+    return redirect()->route('pemberitahuan')->with('success', 'Semua notifikasi telah dibaca.');
+})->name('notifications.markAllRead');
+
+
 
 
 Route::get('/api/fields/{jenisSuratsId}', [LayananController::class, 'getFieldSurats']);
 Route::get('/api/statistikpengajuan', [DashboardController::class, 'jumlahPengajuanPerJenis']);
 
-Route::get('/send-email', function () {
-    $data = [
-        'name' => 'Syahrizal As',
-        'body' => 'Testing Kirim Email di Santri Koding'
-    ];
-
-    Mail::to('hadayaa749@gmail.com')->send(new PengajuanDiajukanMail($data));
-    dd("Email Berhasil dikirim.");
-});
 
 Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -49,6 +64,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/riwayat', [PengajuanSuratController::class, 'history'])->name('riwayat');
 
+    // Route::get('/pemberiitahuan', [BerandaController::class, 'pemberitahuan'])->name('pemberitahuan');
 
     // Route::get('/riwayat', function () {
     //     return view('profile.riwayat');
