@@ -8,20 +8,20 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\DatabaseMessage;
 
-class UserStatusNotification extends Notification
+class PengajuanSuratNotification extends Notification
 {
     use Queueable;
 
-    protected $user;
-    protected $is_active;
+    protected $pengajuan;
+    protected $tipe;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct($is_active, $user)
+    public function __construct($pengajuan, $tipe)
     {
-        $this->user = $user;
-        $this->is_active = $is_active;
+        $this->pengajuan = $pengajuan;
+        $this->tipe = $tipe;
     }
 
     /**
@@ -34,18 +34,6 @@ class UserStatusNotification extends Notification
         return ['database'];
     }
 
-    public function toDatabase($notifiable)
-    {
-        $data = [
-            'user_id' => $this->id,
-            'message' => "Akun Anda Telah Aktif",
-            'is_active' => $this->is_active
-        ];
-
-        return $data;
-    }
-
-
     /**
      * Get the mail representation of the notification.
      */
@@ -56,6 +44,24 @@ class UserStatusNotification extends Notification
     //         ->action('Notification Action', url('/'))
     //         ->line('Thank you for using our application!');
     // }
+
+    public function toDatabase($notifiable)
+    {
+
+        if ($this->tipe === 'User') {
+            return [
+                'message' => "Pengajuan Anda dengan ID {$this->pengajuan->id} berhasil dikirim!",
+                'pengajuan_id' => $this->pengajuan->id,
+                'status' => 'Terkirim'
+            ];
+        } elseif ($this->tipe === 'Admin') {
+            return [
+                'message' => "Pengajuan baru dari {$this->pengajuan->user->name} dengan ID {$this->pengajuan->id}.",
+                'pengajuan_id' => $this->pengajuan->id,
+                'status' => 'Menunggu Verifikasi'
+            ];
+        }
+    }
 
     /**
      * Get the array representation of the notification.

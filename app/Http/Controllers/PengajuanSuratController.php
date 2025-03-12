@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\FieldSurat;
 
 use App\Notifications\NewPengajuan;
+use App\Notifications\PengajuanSuratNotification;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 
@@ -151,6 +152,12 @@ class PengajuanSuratController extends Controller
                 'field_id' => $fieldId,
                 'nilai' => $value,
             ]);
+        }
+        $request->user()->notify(new PengajuanSuratNotification($pengajuan, 'User'));
+
+        $admins = User::where('role', 'Admin')->get();
+        foreach ($admins as $admin) {
+            $admin->notify(new PengajuanSuratNotification($pengajuan, 'Admin'));
         }
 
         return redirect()->route('layanan')->with('success', 'Pengajuan berhasil diajukan!');
