@@ -51,7 +51,7 @@
 
                                 <div class="divide-y divide-gray-100 ">
 
-                                    @foreach (auth()->user()->notifications as $notification)
+                                    @foreach (auth()->user()->notifications->sortByDesc('created_at')->take(10) as $notification)
                                         <div class="w-full ps-3 {{ $notification->read_at ? '' : 'bg-gray-200' }}">
                                             <div class="text-sm text-gray-500">
                                                 <a href="#" class="mark-as-read" data-id="{{ $notification->id }}">
@@ -222,7 +222,7 @@
                 }).then(response => {
                     if (response.ok) {
                         location
-                    .reload(); // Refresh halaman setelah notifikasi ditandai sebagai telah dibaca
+                            .reload(); // Refresh halaman setelah notifikasi ditandai sebagai telah dibaca
                     }
                 }).catch(error => console.error("Error:", error));
             });

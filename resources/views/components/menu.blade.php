@@ -43,19 +43,10 @@
                 </a>
             </li>
 
-            {{-- <li>
-                <a href="{{ route('pengajuansurat') }}"
-                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 ">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
-                    </svg>
-
-
-                    <span class="ms-3">Pengajuan Surat</span>
-                </a>
-            </li> --}}
+            @php
+                // Ambil jumlah pengajuan yang berstatus 'diproses'
+                $jumlahDiproses = \App\Models\PengajuanSurat::where('status', 'diajukan')->count();
+            @endphp
 
             <li>
                 <button type="button"
@@ -72,12 +63,22 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="m1 1 4 4 4-4" />
                     </svg>
+                    @if ($jumlahDiproses > 0)
+                        <span class="w-2 h-2 ml-2 bg-red-500 rounded-full"></span>
+                    @endif
+
                 </button>
                 <ul id="dropdown-example" class="hidden py-2 space-y-2">
                     <li>
                         <a href="{{ route('pengajuan.diproses') }}"
                             class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 ">Perlu
-                            Diproses</a>
+                            Diproses
+                            @if ($jumlahDiproses > 0)
+                                <span class="w-2 h-2 ml-2 bg-red-500 rounded-full"></span>
+                            @endif
+
+                        </a>
+
                     </li>
                     <li>
                         <a href="{{ route('pengajuan.disetujui') }}"
