@@ -41,10 +41,20 @@ Route::get('/notifications', function () {
     return view('frontend.notifikasi', compact('notifications'));
 })->name('pemberitahuan');
 
+Route::get('/notifications-admin', function () {
+    $notifications = Auth::user()->notifications;
+    return view('backend.notifikasi-admin', compact('notifications'));
+})->name('pemberitahuan.admin');
+
 Route::post('/notifications/mark-all-read', function () {
     Auth::user()->unreadNotifications->markAsRead();
     return redirect()->route('pemberitahuan')->with('success', 'Semua notifikasi telah dibaca.');
 })->name('notifications.markAllRead');
+
+Route::post('/notificationsadmin/mark-all-read', function () {
+    Auth::user()->unreadNotifications->markAsRead();
+    return redirect()->route('pemberitahuan.admin')->with('success', 'Semua notifikasi telah dibaca.');
+})->name('notificationsadmin.markAllRead');
 
 
 

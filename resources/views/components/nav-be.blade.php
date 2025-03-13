@@ -65,7 +65,7 @@
 
 
                         <button id="dropdownNotificationButton" data-dropdown-toggle="dropdownNotification"
-                            class="flex text-sm rounded-full bg-slate-300 focus:ring-4 focus:ring-gray-300 dark:hover:text-white dark:text-gray-400"
+                            class="relative inline-flex items-center text-sm font-medium text-center text-gray-500 hover:text-gray-900 focus:outline-none dark:hover:text-white "
                             type="button">
                             <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                 fill="currentColor" viewBox="0 0 14 20">
@@ -74,8 +74,20 @@
                             </svg>
 
                             {{-- <div
-                                class="absolute block w-3 h-3 bg-red-500 border-2 border-white rounded-full -top-0.5 start-2.5 dark:border-gray-900">
-                            </div> --}}
+                            class="absolute block w-3 h-3 bg-red-500 border-2 border-white rounded-full -top-0.5 start-2.5 dark:border-gray-900">
+                        </div> --}}
+
+                            {{-- 🔹 Badge Notifikasi Unread --}}
+                            @php
+                                $unreadCount = auth()->user()->unreadNotifications->count();
+                            @endphp
+
+                            @if ($unreadCount > 0)
+                                <span id="notif-badge"
+                                    class="absolute top-0 right-0 inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-red-500 rounded-full">
+                                    {{ $unreadCount }}
+                                </span>
+                            @endif
                         </button>
 
                         <!-- Dropdown menu -->
@@ -87,32 +99,28 @@
                                 Pemberitahuan
                             </div>
 
-                            <div class="divide-y divide-gray-100 dark:divide-gray-700">
+                            <div class="divide-y divide-gray-100 ">
 
-                                @foreach (auth()->user()->notifications as $notification)
-                                    {{-- <div class="p-3 bg-gray-100 border-b">
-                                        {{ $notification->data['message'] }}
-                                        Status: {{ $notification->data['is_active'] ? 'Aktif' : 'Tidak Aktif' }}
-
-                                    </div> --}}
-                                    <div class="w-full ps-3">
-                                        <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">
-
-                                            {{ $notification->data['message'] }}
+                                @foreach (auth()->user()->notifications->sortByDesc('created_at')->take(10) as $notification)
+                                    <div class="w-full ps-3 {{ $notification->read_at ? '' : 'bg-gray-200' }}">
+                                        <div class="text-sm text-gray-500">
+                                            <a href="#" class="mark-as-read" data-id="{{ $notification->id }}">
+                                                {{ $notification->data['message'] }}
+                                            </a>
                                         </div>
-                                        <div class="text-xs text-blue-600 dark:text-blue-500">
-                                            {{ $notification['created_at'] }}</div>
-                                        {{-- {{ \Carbon\Carbon::parse($notification['created_at'])->translatedFormat('d F Y H:i') }} --}}
-
+                                        <div class="text-xs text-blue-600 mb-1.5">
+                                            {{ \Carbon\Carbon::parse($notification->created_at)->translatedFormat('d F Y H:i') }}
+                                        </div>
                                     </div>
                                 @endforeach
 
 
+
                             </div>
-                            <a href="{{ route('pemberitahuan') }}"
+                            <a href="{{ route('pemberitahuan.admin') }}"
                                 class="block py-2 text-sm font-medium text-center text-gray-900 rounded-b-lg bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white">
                                 <div class="inline-flex items-center ">
-                                    <svg class="w-4 h-4 text-gray-500 me-2 dark:text-gray-400" aria-hidden="true"
+                                    <svg class="w-4 h-4 text-gray-500 me-2 " aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
                                         <path
                                             d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
@@ -130,3 +138,28 @@
         </div>
     </div>
 </nav>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".mark-as-read").forEach(function(element) {
+            element.addEventListener("click", function(event) {
+                event.preventDefault();
+                let notificationId = this.dataset.id;
+
+                fetch(`/notifications/mark-as-read/${notificationId}`, {
+                    method: "POST",
+                    headers: {
+                        "X-CSRF-TOKEN": document.querySelector(
+                            'meta[name="csrf-token"]').content,
+                        "Content-Type": "application/json"
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        location
+                            .reload(); // Refresh halaman setelah notifikasi ditandai sebagai telah dibaca
+                    }
+                }).catch(error => console.error("Error:", error));
+            });
+        });
+    });
+</script>
