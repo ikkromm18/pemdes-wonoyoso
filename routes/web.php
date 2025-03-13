@@ -111,6 +111,9 @@ Route::middleware(['role:Admin'])->group(function () {
     Route::get('/pengajuandisetujui', [PengajuanSuratController::class, 'disetujui'])->name('pengajuan.disetujui');
     Route::get('/pengajuanditolak', [PengajuanSuratController::class, 'ditolak'])->name('pengajuan.ditolak');
 
+    Route::post('/pengajuan/update-status', [PengajuanSuratController::class, 'updateStatus'])->name('pengajuan.updateStatus');
+
+
 
 
     Route::get('/pengajuan/print/{id}', [PengajuanSuratController::class, 'Print'])->name('print');

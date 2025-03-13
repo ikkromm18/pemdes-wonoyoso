@@ -174,7 +174,7 @@
     </div>
 </nav>
 
-<div id="popup-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden w-full h-full">
+<div id="popup-modal" class="fixed inset-0 z-50 items-center justify-center hidden w-full h-full">
     <div class="relative w-full max-w-md p-4 bg-white rounded-lg shadow-sm">
         <button type="button" class="absolute text-gray-400 top-3 right-3 hover:text-gray-900"
             data-modal-hide="popup-modal">
