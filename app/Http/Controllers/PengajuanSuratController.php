@@ -420,4 +420,24 @@ class PengajuanSuratController extends Controller
 
         return view('backend.pengajuan.pengajuanditolak', $data);
     }
+
+    public function updateStatus(Request $request)
+    {
+        // Pastikan ada pengajuan yang dipilih
+        if (!$request->has('selected')) {
+            return redirect()->back()->with('error', 'Pilih setidaknya satu pengajuan untuk diproses atau ditolak.');
+        }
+
+        // Pastikan ada status yang dikirim
+        if (!$request->has('status')) {
+            return redirect()->back()->with('error', 'Pilih aksi yang ingin dilakukan.');
+        }
+
+        $status = $request->status; // 'diproses' atau 'ditolak'
+
+        // Update status pengajuan yang dipilih
+        PengajuanSurat::whereIn('id', $request->selected)->update(['status' => $status]);
+
+        return redirect()->back()->with('success', 'Pengajuan yang dipilih berhasil diperbarui menjadi ' . $status . '.');
+    }
 }
