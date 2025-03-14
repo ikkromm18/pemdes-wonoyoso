@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Models\FieldSurat;
 
 use App\Notifications\NewPengajuan;
+use App\Notifications\PengajuanDiprosesNotification;
+use App\Notifications\PengajuanDitolakNotitication;
 use App\Notifications\PengajuanSuratNotification;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -173,6 +175,11 @@ class PengajuanSuratController extends Controller
 
         $pengajuan = PengajuanSurat::where('id', $id)->first();
 
+        $user = User::where('nik', $pengajuan->nik)
+            ->where('email', $pengajuan->email)
+            ->first();
+
+
         if (!$pengajuan) {
             return redirect()->route('pengajuan.diproses')->with('error', 'Pengajuan tidak ditemukan.');
         }
@@ -186,6 +193,9 @@ class PengajuanSuratController extends Controller
         $pengajuan->update($data);
 
 
+        $user->notify(new PengajuanDiprosesNotification($pengajuan));
+
+
         return redirect()->route('pengajuan.disetujui')->with('success' . 'Pengajuan Berhasil Disetujui');
     }
 
@@ -197,6 +207,10 @@ class PengajuanSuratController extends Controller
 
         $pengajuan = PengajuanSurat::where('id', $id)->first();
 
+        $user = User::where('nik', $pengajuan->nik)
+            ->where('email', $pengajuan->email)
+            ->first();
+
         if (!$pengajuan) {
             return redirect()->route('pengajuan.diproses')->with('error', 'Pengajuan tidak ditemukan.');
         }
@@ -207,6 +221,8 @@ class PengajuanSuratController extends Controller
         ];
 
         $pengajuan->update($data);
+
+        $user->notify(new PengajuanDitolakNotitication($pengajuan));
 
         return redirect()->route('pengajuan.ditolak')->with('success' . 'Pengajuan Berhasil Ditolak');
     }
