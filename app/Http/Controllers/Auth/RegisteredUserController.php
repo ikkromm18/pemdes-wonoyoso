@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use App\Notifications\RegisterUserNotification;
 
 class RegisteredUserController extends Controller
 {
@@ -96,6 +97,13 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
+
+        $admins = User::where('role', 'admin')->get();
+
+        foreach ($admins as $admin) {
+            $admin->notify(new RegisterUserNotification($user));
+        }
+
 
         // Redirect ke halaman login
         // return redirect(route('login', absolute: false));
