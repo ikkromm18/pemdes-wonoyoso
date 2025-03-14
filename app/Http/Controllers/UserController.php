@@ -15,11 +15,37 @@ class UserController extends Controller
     {
 
         $search = $request->input('search');
-
         $users = User::where('role', 'User')
+            ->where('is_active', true) // Menambahkan kondisi is_active = true
             ->when($search, function ($query, $search) {
-                $query->where('name', 'like', "%{$search}%")
-                    ->orWhere('email', 'like', "%{$search}%");
+                $query->where(function ($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%")
+                        ->orWhere('email', 'like', "%{$search}%");
+                });
+            })
+            ->paginate(7)
+            ->withQueryString();
+
+        // $users = User::where('role', 'User')->paginate(7);
+
+        $data = [
+            'users' => $users
+        ];
+
+
+        return view('backend.user.index-user', $data);
+    }
+
+    public function unactive(Request $request)
+    {
+        $search = $request->input('search');
+        $users = User::where('role', 'User')
+            ->where('is_active', false) // Menambahkan kondisi is_active = true
+            ->when($search, function ($query, $search) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%")
+                        ->orWhere('email', 'like', "%{$search}%");
+                });
             })
             ->paginate(7)
             ->withQueryString();

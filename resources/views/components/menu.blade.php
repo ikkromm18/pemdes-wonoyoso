@@ -97,7 +97,11 @@
 
             </li>
 
+            @php
 
+                $jumlahunactive = \App\Models\User::where('is_active', 0)->where('role', 'User')->count();
+
+            @endphp
 
             <li>
                 <button type="button"
@@ -114,12 +118,19 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="m1 1 4 4 4-4" />
                     </svg>
+                    @if ($jumlahunactive > 0)
+                        <span class="w-2 h-2 ml-2 bg-red-500 rounded-full"></span>
+                    @endif
                 </button>
                 <ul id="dropdown-example1" class="hidden py-2 space-y-2">
                     <li>
-                        <a href="{{ route('user.index') }}"
+                        <a href="{{ route('user.unactive') }}"
                             class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 ">Aktivasi
-                            Akun</a>
+                            Akun
+                            @if ($jumlahunactive > 0)
+                                <span class="w-2 h-2 ml-2 bg-red-500 rounded-full"></span>
+                            @endif
+                        </a>
                     </li>
                     <li>
                         <a href="{{ route('user.index') }}"
