@@ -43,26 +43,57 @@
 
     <div class="mt-4">
         <div class="flex-col">
-            @foreach ($details as $detail)
-                @if (!in_array($detail['nama_field'], ['Keperluan']))
-                    <div class="flex gap-4 w-full">
-                        <p class="w-40">{{ $detail['nama_field'] }}</p>
-                        <p>:</p>
-                        <p>
-                            @if (strtotime($detail['nilai']))
-                                <!-- Cek apakah nilai adalah tanggal -->
-                                {{ \Carbon\Carbon::parse($detail['nilai'])->translatedFormat('d F Y') }}
-                            @else
-                                {{ $detail['nilai'] }}
-                            @endif
-                        </p>
-                    </div>
-                @endif
-            @endforeach
+            <div class="flex w-full gap-4">
+                <p class="w-40">Nama Lengkap</p>
+                <p>:</p>
+                <p>
+                    {{ $nama }}
+                </p>
+            </div>
+
+            <div class="flex w-full gap-4">
+                <p class="w-40">Tempat / Tanggal Lahir</p>
+                <p>:</p>
+                <p>
+                    {{ $tempatlahir . ', ' . \Carbon\Carbon::parse($tgl_lahir)->translatedFormat('d F Y') }}
+                </p>
+            </div>
+
+            <div class="flex w-full gap-4">
+                <p class="w-40">NIK</p>
+                <p>:</p>
+                <p>
+                    {{ $nik }}
+                </p>
+            </div>
+
+            <div class="flex w-full gap-4">
+                <p class="w-40">Alamat</p>
+                <p>:</p>
+                <p>
+                    {{ $alamat }}
+                </p>
+            </div>
+
+            <div class="flex w-full gap-4">
+                <p class="w-40">Pekerjaan</p>
+                <p>:</p>
+                <p>
+                    {{ $pekerjaan }}
+                </p>
+            </div>
+
+            <div class="flex w-full gap-4">
+                <p class="w-40">Agama</p>
+                <p>:</p>
+                <p>
+                    {{ $agama }}
+                </p>
+            </div>
         </div>
     </div>
 
-    <p class="mt-8">Dengan ini menerangkan dengan sebenarnya bahwa yang bersangkutan benar berdomisili di Wonoyoso
+    <p class="mt-6">Dengan ini menerangkan dengan sebenarnya bahwa yang bersangkutan benar berdomisili di Wonoyoso
     </p>
 
 
@@ -75,7 +106,7 @@
 
 
 
-    <x-tanda-tangan kepalaDesa="BAYU SUKMONO" />
+    <x-tanda-tangan kepalaDesa="{{ $namakades->nama_kepala_desa }}" />
 
 
     <script>

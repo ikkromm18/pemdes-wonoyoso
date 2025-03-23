@@ -7,7 +7,7 @@ use App\Models\DataPengajuan;
 use App\Models\PengajuanSurat;
 use App\Models\User;
 use App\Models\FieldSurat;
-
+use App\Models\Setting;
 use App\Notifications\NewPengajuan;
 use App\Notifications\PengajuanDiprosesNotification;
 use App\Notifications\PengajuanDitolakNotitication;
@@ -282,12 +282,14 @@ class PengajuanSuratController extends Controller
         return $pdf->download('pengajuan_' . $pengajuan->id . '.pdf');
     }
 
-    public function Print($id)
+    public function Print(Request $request, $id)
     {
         $pengajuan = PengajuanSurat::with('JenisSurats', 'DataPengajuans.FieldSurats')
             ->findOrFail($id);
 
+        $namakades = Setting::first();
 
+        $user = User::where('nik', $pengajuan->nik)->first();
 
         $data = [
             'id' => $pengajuan->id,
@@ -295,8 +297,14 @@ class PengajuanSuratController extends Controller
             'nama' => $pengajuan->nama,
             'email' => $pengajuan->email,
             'alamat' => $pengajuan->alamat,
+            'no_hp' => $user->no_hp,
+            'agama' => $user->agama,
+            'pekerjaan' => $user->pekerjaan,
+            'tempatlahir' => $user->tempat_lahir,
+            'tgl_lahir' => $user->tgl_lahir,
             'jenis_surat' => $pengajuan->JenisSurats->nama_jenis,
             'status' => $pengajuan->status,
+            'namakades' => $namakades,
             'details' => $pengajuan->DataPengajuans->map(function ($detail) {
                 return [
                     'nama_field' => $detail->fieldSurats->nama_field,

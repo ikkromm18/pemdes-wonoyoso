@@ -38,6 +38,8 @@
                     <p class="text-sm text-gray-600"><strong>Email:</strong> {{ $user->email }}</p>
                     <p class="text-sm text-gray-600"><strong>NIK:</strong> {{ $user->nik }}</p>
                     <p class="text-sm text-gray-600"><strong>Nomor HP:</strong> {{ $user->nomor_hp }}</p>
+                    <p class="text-sm text-gray-600"><strong>Agama:</strong> {{ $user->agama }}</p>
+                    <p class="text-sm text-gray-600"><strong>Pekerjaan:</strong> {{ $user->pekerjaan }}</p>
                     <p class="text-sm text-gray-600"><strong>Tempat dan Tanggal Lahir:</strong>
                         {{ $user->tempat_lahir . ', ' . \Carbon\Carbon::parse($user->tgl_lahir)->translatedFormat('d F Y') }}
                     </p>

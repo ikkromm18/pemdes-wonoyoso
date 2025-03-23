@@ -67,6 +67,20 @@
         </div>
 
         <div>
+            <x-input-label for="agama" :value="__('Agama')" />
+            <x-text-input id="agama" agama="agama" type="text" class="block w-full mt-1" :value="old('agama', $user->agama)"
+                required autofocus autocomplete="agama" name="agama" />
+            <x-input-error class="mt-2" :messages="$errors->get('agama')" />
+        </div>
+
+        <div>
+            <x-input-label for="pekerjaan" :value="__('Pekerjaan')" />
+            <x-text-input id="pekerjaan" pekerjaan="pekerjaan" type="text" class="block w-full mt-1"
+                :value="old('pekerjaan', $user->pekerjaan)" required autofocus autocomplete="pekerjaan" name="pekerjaan" />
+            <x-input-error class="mt-2" :messages="$errors->get('pekerjaan')" />
+        </div>
+
+        <div>
             <x-input-label for="tempat_lahir" :value="__('Tempat Lahir')" />
             <x-text-input id="tempat_lahir" tempat_lahir="tempat_lahir" type="text" class="block w-full mt-1"
                 :value="old('tempat_lahir', $user->tempat_lahir)" required autofocus autocomplete="tempat_lahir" name="tempat_lahir" />
@@ -91,7 +105,7 @@
         <div>
             <x-input-label for="alamat_kedua" :value="__('Alamat Kedua')" />
             <x-text-input id="alamat_kedua" alamat_kedua="alamat_kedua" type="text" class="block w-full mt-1"
-                :value="old('alamat_kedua', $user->alamat_kedua)" required autofocus autocomplete="alamat_kedua" name="alamat_kedua" />
+                :value="old('alamat_kedua', $user->alamat_kedua)" autofocus autocomplete="alamat_kedua" name="alamat_kedua" />
             <x-input-error class="mt-2" :messages="$errors->get('alamat_kedua')" />
         </div>
 
@@ -108,13 +122,14 @@
             </div>
 
             <!-- Area Preview -->
-            <img id="image-preview1" src="{{ $user->foto_ktp ? asset($user->foto_ktp) : '#' }}" alt="Preview Foto KTP"
-                class="mt-2 {{ $user->foto_ktp ? '' : 'hidden' }} w-32 rounded" />
+            <img id="image-preview1" src="{{ $user->foto_ktp ? asset($user->foto_ktp) : '#' }}"
+                alt="Preview Foto KTP" class="mt-2 {{ $user->foto_ktp ? '' : 'hidden' }} w-32 rounded" />
         </div>
 
         <div>
             <x-input-label for="foto_kk" :value="__('Foto KK')" />
-            <x-text-input id="foto_kk" foto_kk="foto_kk" type="file" class="block w-full mt-1" name="foto_kk" />
+            <x-text-input id="foto_kk" foto_kk="foto_kk" type="file" class="block w-full mt-1"
+                name="foto_kk" />
             <x-input-error class="mt-2" :messages="$errors->get('foto_kk')" />
 
             <!-- Area Default Dropzone -->

@@ -28,8 +28,13 @@ class LayananController extends Controller
 
         $jenisSurats = JenisSurat::all();
 
+        $user = $request->user();
+
+
+
         $data = [
-            'jenissurats' => $jenisSurats
+            'jenissurats' => $jenisSurats,
+            'user' => $user
         ];
 
         // dd($data);

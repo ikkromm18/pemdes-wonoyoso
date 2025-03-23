@@ -2,34 +2,52 @@
 @section('title', 'Layanan')
 @section('content')
 
-    <div class="max-w-screen-xl mx-auto min-h-screen">
+    <div class="max-w-screen-lg min-h-screen mx-auto">
         @include('components.alert')
         <div class="flex">
-            <div class="bg-white shadow-lg w-full mt-16 rounded-sm p-8">
-                <h1 class="text-center font-semibold text-2xl mb-8">Form Pengajuan Surat</h1>
+            <div class="w-full p-8 mt-4 bg-white rounded-sm shadow-lg">
+                <h1 class="mb-8 text-2xl font-semibold text-center">Form Pengajuan Surat</h1>
 
-                <form class="max-w-xl mx-auto" action="{{ route('pengajuan.store') }}" method="POST"
+                <form class="max-w-3xl mx-auto" action="{{ route('pengajuan.store') }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
 
-                    <!-- Dropdown Jenis Surat -->
-                    <div class="relative z-0 w-full mb-5 group">
-                        <label for="jenis_surat_id"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis
-                            Surat</label>
-                        <select id="jenis_surat_id" name="jenis_surat_id"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option selected disabled>Pilih Jenis Surat</option>
-                            @foreach ($jenissurats as $js)
-                                <option value="{{ $js->id }}">{{ $js->nama_jenis }}</option>
-                            @endforeach
-                        </select>
+                    <div class="p-4 mb-5 border rounded-lg bg-gray-50">
+                        <h2 class="mb-2 text-lg font-semibold">Data Pengguna</h2>
+                        <p><strong>Nama:</strong> {{ auth()->user()->name }}</p>
+                        <p><strong>Email:</strong> {{ auth()->user()->email }}</p>
+                        <p><strong>Alamat Utama:</strong> {{ auth()->user()->alamat_utama }}</p>
+                        <p><strong>Nomor HP:</strong> {{ auth()->user()->nomor_hp }}</p>
+                        <p><strong>Agama:</strong> {{ auth()->user()->agama }}</p>
+                        <p><strong>Pekerjaan:</strong> {{ auth()->user()->pekerjaan }}</p>
+                        <p><strong>Tempat / Tanggal Lahir:</strong>
+                            {{ auth()->user()->tempat_lahir . ', ' . \Carbon\Carbon::parse(auth()->user()->tgl_lahir)->translatedFormat('d F Y') }}
+                        </p>
+
+                        <p class="mt-4 text-xs font-bold">Note: data yang akan dicantumkan di surat adalah data
+                            anda
+                            diatas,
+                            pastikan
+                            data pribadi sudah
+                            benar</p>
                     </div>
 
-                    <!-- Input Dinamis -->
-                    <div id="input_dinamis"></div>
+                    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                        <div class="relative z-0 w-full mb-5 group">
+                            <label for="jenis_surat_id" class="block mb-2 text-sm font-medium text-gray-900">Jenis
+                                Surat</label>
+                            <select id="jenis_surat_id" name="jenis_surat_id"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                <option selected disabled>Pilih Jenis Surat</option>
+                                @foreach ($jenissurats as $js)
+                                    <option value="{{ $js->id }}">{{ $js->nama_jenis }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
 
-                    <!-- Tombol Submit dengan Modal -->
+                    <div id="input_dinamis" class="grid grid-cols-1 gap-4 md:grid-cols-2"></div>
+
                     <button data-modal-target="popup-modal-layanan" data-modal-toggle="popup-modal-layanan"
                         dusk="submit-pengajuan"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
@@ -37,13 +55,12 @@
                         Submit
                     </button>
 
-                    <!-- Modal Konfirmasi -->
                     <div id="popup-modal-layanan" tabindex="-1"
-                        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                        <div class="relative p-4 w-full max-w-md max-h-full">
-                            <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+                        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full h-[calc(100%-1rem)] max-h-full">
+                        <div class="relative w-full max-w-md max-h-full p-4">
+                            <div class="relative bg-white rounded-lg shadow-sm">
                                 <button type="button"
-                                    class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
+                                    class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto"
                                     data-modal-hide="popup-modal-layanan">
                                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                         fill="none" viewBox="0 0 14 14">
@@ -52,20 +69,20 @@
                                     </svg>
                                     <span class="sr-only">Close modal</span>
                                 </button>
-                                <div class="p-4 md:p-5 text-center">
-                                    <svg class="mx-auto mb-4 text-gray-400 w-12 h-12" aria-hidden="true"
+                                <div class="p-4 text-center md:p-5">
+                                    <svg class="w-12 h-12 mx-auto mb-4 text-gray-400" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                             stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                     </svg>
-                                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Apakah Data Yang
-                                        Anda Isi Sudah Benar?</h3>
+                                    <h3 class="mb-5 text-lg font-normal text-gray-500">Apakah Data Yang Anda Isi Sudah
+                                        Benar?</h3>
                                     <button type="submit" dusk="submit-btn"
                                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
                                         Submit
                                     </button>
                                     <button data-modal-hide="popup-modal-layanan" type="button"
-                                        class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-20 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                        class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700">
                                         Kembali
                                     </button>
                                 </div>
@@ -94,44 +111,28 @@
                             const inputLabel = document.createElement('label');
                             inputLabel.textContent = field.nama_field;
                             inputLabel.classList.add('block', 'mb-2', 'text-sm', 'font-medium',
-                                'text-gray-900', 'dark:text-white');
+                                'text-gray-900');
 
                             let inputElement;
 
                             if (field.tipe_field === 'boolean') {
-                                // Dropdown untuk tipe boolean
                                 inputElement = document.createElement('select');
-                                inputElement.classList.add('bg-gray-50', 'border', 'border-gray-300',
-                                    'text-gray-900', 'text-sm', 'rounded-lg', 'focus:ring-blue-500',
-                                    'focus:border-blue-500', 'block', 'w-full', 'p-2.5',
-                                    'dark:bg-gray-700', 'dark:border-gray-600',
-                                    'dark:placeholder-gray-400', 'dark:text-white',
-                                    'dark:focus:ring-blue-500', 'dark:focus:border-blue-500');
+                                inputElement.classList.add('bg-gray-50', 'border', 'text-gray-900',
+                                    'text-sm', 'rounded-lg', 'block', 'w-full', 'p-2.5');
                                 inputElement.name = `fields[${field.id}]`;
-                                inputElement.innerHTML = `
-                                    <option value="1">Ya</option>
-                                    <option value="0">Tidak</option>
-                                `;
+                                inputElement.innerHTML =
+                                    '<option value="1">Ya</option><option value="0">Tidak</option>';
                             } else {
-                                // Input teks untuk tipe lain
                                 inputElement = document.createElement('input');
                                 inputElement.type = field.tipe_field;
-                                inputElement.classList.add('bg-gray-50', 'border', 'border-gray-300',
-                                    'text-gray-900', 'text-sm', 'rounded-lg', 'focus:ring-blue-500',
-                                    'focus:border-blue-500', 'block', 'w-full', 'p-2.5',
-                                    'dark:bg-gray-700', 'dark:border-gray-600',
-                                    'dark:placeholder-gray-400', 'dark:text-white',
-                                    'dark:focus:ring-blue-500', 'dark:focus:border-blue-500');
+                                inputElement.classList.add('bg-gray-50', 'border', 'text-gray-900',
+                                    'text-sm', 'rounded-lg', 'block', 'w-full', 'p-2.5');
                                 inputElement.name = `fields[${field.id}]`;
                             }
 
                             inputElement.required = field.is_required;
-
-                            // Tambahkan elemen ke dalam grup
                             formGroup.appendChild(inputLabel);
                             formGroup.appendChild(inputElement);
-
-                            // Tambahkan grup ke dalam container input dinamis
                             inputDinamis.appendChild(formGroup);
                         });
                     });

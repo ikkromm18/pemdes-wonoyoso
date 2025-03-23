@@ -43,9 +43,58 @@
 
     <div class="mt-4">
         <div class="flex-col">
+            <div class="flex w-full gap-4">
+                <p class="w-44">Nama Lengkap</p>
+                <p>:</p>
+                <p>
+                    {{ $nama }}
+                </p>
+            </div>
+
+            <div class="flex w-full gap-4">
+                <p class="w-44">Tempat / Tanggal Lahir</p>
+                <p>:</p>
+                <p>
+                    {{ $tempatlahir . ', ' . \Carbon\Carbon::parse($tgl_lahir)->translatedFormat('d F Y') }}
+                </p>
+            </div>
+
+
+
+            <div class="flex w-full gap-4">
+                <p class="w-44">Alamat</p>
+                <p>:</p>
+                <p>
+                    {{ $alamat }}
+                </p>
+            </div>
+
+            <div class="flex w-full gap-4">
+                <p class="w-44">Pekerjaan</p>
+                <p>:</p>
+                <p>
+                    {{ $pekerjaan }}
+                </p>
+            </div>
+
+            <div class="flex w-full gap-4">
+                <p class="w-44">Agama</p>
+                <p>:</p>
+                <p>
+                    {{ $agama }}
+                </p>
+            </div>
+
+            <div class="flex w-full gap-4">
+                <p class="w-44">NIK</p>
+                <p>:</p>
+                <p>
+                    {{ $nik }}
+                </p>
+            </div>
             @foreach ($details as $detail)
-                @if (!in_array($detail['nama_field'], []))
-                    <div class="flex gap-4 w-full">
+                @if (!in_array($detail['nama_field'], ['Foto Pengantar RT']))
+                    <div class="flex w-full gap-4">
                         <p class="w-44">{{ $detail['nama_field'] }}</p>
                         <p>:</p>
                         <p>
@@ -69,7 +118,7 @@
 
 
 
-    <x-tanda-tangan kepalaDesa="BAYU SUKMONO" />
+    <x-tanda-tangan kepalaDesa="{{ $namakades->nama_kepala_desa }}" />
 
 
     <script>

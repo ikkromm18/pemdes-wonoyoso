@@ -43,20 +43,56 @@
 
     <div class="mt-4">
         <div class="flex-col">
+            <div class="flex w-full gap-4">
+                <p class="w-40">Nama Lengkap</p>
+                <p>:</p>
+                <p>
+                    {{ $nama }}
+                </p>
+            </div>
+
+            <div class="flex w-full gap-4">
+                <p class="w-40">Tempat / Tanggal Lahir</p>
+                <p>:</p>
+                <p>
+                    {{ $tempatlahir . ', ' . \Carbon\Carbon::parse($tgl_lahir)->translatedFormat('d F Y') }}
+                </p>
+            </div>
+
+            <div class="flex w-full gap-4">
+                <p class="w-40">NIK</p>
+                <p>:</p>
+                <p>
+                    {{ $nik }}
+                </p>
+            </div>
+
+            <div class="flex w-full gap-4">
+                <p class="w-40">Alamat</p>
+                <p>:</p>
+                <p>
+                    {{ $alamat }}
+                </p>
+            </div>
+
+            <div class="flex w-full gap-4">
+                <p class="w-40">Pekerjaan</p>
+                <p>:</p>
+                <p>
+                    {{ $pekerjaan }}
+                </p>
+            </div>
+
+            <div class="flex w-full gap-4">
+                <p class="w-40">Agama</p>
+                <p>:</p>
+                <p>
+                    {{ $agama }}
+                </p>
+            </div>
             @foreach ($details as $detail)
-                @if (in_array($detail['nama_field'], [
-                        'Nama Lengkap',
-                        'Jenis Kelamin',
-                        'Tempat Lahir',
-                        'Tanggal Lahir',
-                        'Status Perkawinan',
-                        'Kewarganegaraan',
-                        'Agama',
-                        'Pekerjaan',
-                        'NIK',
-                        'Alamat',
-                    ]))
-                    <div class="flex gap-4 w-full">
+                @if (in_array($detail['nama_field'], ['Jenis Kelamin', 'Status Perkawinan', 'Kewarganegaraan']))
+                    <div class="flex w-full gap-4">
                         <p class="w-40">{{ $detail['nama_field'] }}</p>
                         <p>:</p>
                         <p>
@@ -89,7 +125,7 @@
         <div class="flex-col">
             @foreach ($details as $detail)
                 @if (in_array($detail['nama_field'], ['Hari', 'Tanggal', 'Tempat', 'Acara']))
-                    <div class="flex gap-4 w-full">
+                    <div class="flex w-full gap-4">
                         <p class="w-40">{{ $detail['nama_field'] }}</p>
                         <p>:</p>
                         <p>
@@ -111,7 +147,7 @@
 
 
 
-    <x-tanda-tangan kepalaDesa="BAYU SUKMONO" />
+    <x-tanda-tangan kepalaDesa="{{ $namakades->nama_kepala_desa }}" />
 
 
     <script>

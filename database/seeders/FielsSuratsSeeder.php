@@ -18,7 +18,7 @@ class FielsSuratsSeeder extends Seeder
             // Surat Kematian
             [
                 'jenis_surat_id' => 1,
-                'nama_field' => 'Nama',
+                'nama_field' => 'Nama Almarhum',
                 'tipe_field' => 'text',
             ],
             [
@@ -43,7 +43,7 @@ class FielsSuratsSeeder extends Seeder
             ],
             [
                 'jenis_surat_id' => 1,
-                'nama_field' => 'Hari',
+                'nama_field' => 'Hari Meninggal',
                 'tipe_field' => 'text',
             ],
             [
@@ -62,41 +62,21 @@ class FielsSuratsSeeder extends Seeder
                 'tipe_field' => 'text',
             ],
             //2 Pengantar Umum
+
+
             [
                 'jenis_surat_id' => 2,
-                'nama_field' => 'Nama Lengkap',
+                'nama_field' => 'Status Perkawinan',
                 'tipe_field' => 'text',
             ],
-            [
-                'jenis_surat_id' => 2,
-                'nama_field' => 'Tempat Lahir',
-                'tipe_field' => 'text',
-            ],
-            [
-                'jenis_surat_id' => 2,
-                'nama_field' => 'Tanggal Lahir',
-                'tipe_field' => 'date',
-            ],
-            [
-                'jenis_surat_id' => 2,
-                'nama_field' => 'Pekerjaan',
-                'tipe_field' => 'text',
-            ],
-            [
-                'jenis_surat_id' => 2,
-                'nama_field' => 'Alamat',
-                'tipe_field' => 'text',
-            ],
-            [
-                'jenis_surat_id' => 2,
-                'nama_field' => 'NIK',
-                'tipe_field' => 'number',
-            ],
+
+
             [
                 'jenis_surat_id' => 2,
                 'nama_field' => 'Keperluan',
                 'tipe_field' => 'text',
             ],
+
             [
                 'jenis_surat_id' => 2,
                 'nama_field' => 'Foto Pengantar RT',
@@ -125,12 +105,12 @@ class FielsSuratsSeeder extends Seeder
             ],
             [
                 'jenis_surat_id' => 3,
-                'nama_field' => 'Pekerjaan',
+                'nama_field' => 'Pekerjaan Orang Tua',
                 'tipe_field' => 'text',
             ],
             [
                 'jenis_surat_id' => 3,
-                'nama_field' => 'Alamat',
+                'nama_field' => 'Alamat Orang Tua',
                 'tipe_field' => 'text',
             ],
             [
@@ -159,11 +139,6 @@ class FielsSuratsSeeder extends Seeder
                 'jenis_surat_id' => 4,
                 'nama_field' => 'Nama Lengkap',
                 'tipe_field' => 'text',
-            ],
-            [
-                'jenis_surat_id' => 4,
-                'nama_field' => 'NIK',
-                'tipe_field' => 'number',
             ],
             [
                 'jenis_surat_id' => 4,
@@ -213,36 +188,6 @@ class FielsSuratsSeeder extends Seeder
             //Surat Keterangan Usaha 
             [
                 'jenis_surat_id' => 5,
-                'nama_field' => 'Nama Lengkap',
-                'tipe_field' => 'text',
-            ],
-            [
-                'jenis_surat_id' => 5,
-                'nama_field' => 'Tempat Lahir',
-                'tipe_field' => 'text',
-            ],
-            [
-                'jenis_surat_id' => 5,
-                'nama_field' => 'Tanggal Lahir',
-                'tipe_field' => 'date',
-            ],
-            [
-                'jenis_surat_id' => 5,
-                'nama_field' => 'NIK',
-                'tipe_field' => 'number',
-            ],
-            [
-                'jenis_surat_id' => 5,
-                'nama_field' => 'Pekerjaan',
-                'tipe_field' => 'text',
-            ],
-            [
-                'jenis_surat_id' => 5,
-                'nama_field' => 'Alamat',
-                'tipe_field' => 'text',
-            ],
-            [
-                'jenis_surat_id' => 5,
                 'nama_field' => 'Nama / Jenis Usaha',
                 'tipe_field' => 'text',
             ],
@@ -263,41 +208,7 @@ class FielsSuratsSeeder extends Seeder
             ],
 
             // Surat Keternagan Domisili
-            [
-                'jenis_surat_id' => 6,
-                'nama_field' => 'Nama Lengkap',
-                'tipe_field' => 'text',
-            ],
-            [
-                'jenis_surat_id' => 6,
-                'nama_field' => 'NIK',
-                'tipe_field' => 'number',
-            ],
-            [
-                'jenis_surat_id' => 6,
-                'nama_field' => 'Tempat Lahir',
-                'tipe_field' => 'text',
-            ],
-            [
-                'jenis_surat_id' => 6,
-                'nama_field' => 'Tanggal Lahir',
-                'tipe_field' => 'date',
-            ],
-            [
-                'jenis_surat_id' => 6,
-                'nama_field' => 'Agama',
-                'tipe_field' => 'text',
-            ],
-            [
-                'jenis_surat_id' => 6,
-                'nama_field' => 'Pekerjaan',
-                'tipe_field' => 'text',
-            ],
-            [
-                'jenis_surat_id' => 6,
-                'nama_field' => 'Alamat Lengkap',
-                'tipe_field' => 'text',
-            ],
+
             [
                 'jenis_surat_id' => 6,
                 'nama_field' => 'Keperluan',
@@ -310,34 +221,15 @@ class FielsSuratsSeeder extends Seeder
             ],
 
             //Surat Keterangan Ahli Waris
-            [
-                'jenis_surat_id' => 7,
-                'nama_field' => 'Nama',
-                'tipe_field' => 'text',
-            ],
-            [
-                'jenis_surat_id' => 7,
-                'nama_field' => 'Tempat Lahir',
-                'tipe_field' => 'text',
-            ],
-            [
-                'jenis_surat_id' => 7,
-                'nama_field' => 'Tanggal Lahir',
-                'tipe_field' => 'date',
-            ],
-            [
-                'jenis_surat_id' => 7,
-                'nama_field' => 'Pekerjaan',
-                'tipe_field' => 'text',
-            ],
-            [
-                'jenis_surat_id' => 7,
-                'nama_field' => 'Tempat Tinggal',
-                'tipe_field' => 'text',
-            ],
+
             [
                 'jenis_surat_id' => 7,
                 'nama_field' => 'Nama Pewaris',
+                'tipe_field' => 'text',
+            ],
+            [
+                'jenis_surat_id' => 7,
+                'nama_field' => 'Tempat Lahir Pewaris',
                 'tipe_field' => 'text',
             ],
             [
@@ -363,7 +255,7 @@ class FielsSuratsSeeder extends Seeder
             [
                 'jenis_surat_id' => 7,
                 'nama_field' => 'Tanggal Meninggal',
-                'tipe_field' => 'text',
+                'tipe_field' => 'date',
             ],
             // Pengantar Izin Keramaian
             [
@@ -393,12 +285,12 @@ class FielsSuratsSeeder extends Seeder
             ],
             [
                 'jenis_surat_id' => 8,
-                'nama_field' => 'Hari',
+                'nama_field' => 'Hari Pelaksanaan',
                 'tipe_field' => 'text',
             ],
             [
                 'jenis_surat_id' => 8,
-                'nama_field' => 'Tanggal',
+                'nama_field' => 'Tanggal Pelaksanaan',
                 'tipe_field' => 'date',
             ],
             [
@@ -408,7 +300,7 @@ class FielsSuratsSeeder extends Seeder
             ],
             [
                 'jenis_surat_id' => 8,
-                'nama_field' => 'Acara',
+                'nama_field' => 'Isi Acara',
                 'tipe_field' => 'text',
             ],
             [
@@ -417,26 +309,7 @@ class FielsSuratsSeeder extends Seeder
                 'tipe_field' => 'file',
             ],
             // Surat Keterangan Pindah Penduduk
-            [
-                'jenis_surat_id' => 9,
-                'nama_field' => 'Nama',
-                'tipe_field' => 'text',
-            ],
-            [
-                'jenis_surat_id' => 9,
-                'nama_field' => 'Tempat Lahir',
-                'tipe_field' => 'text',
-            ],
-            [
-                'jenis_surat_id' => 9,
-                'nama_field' => 'Tanggal Lahir',
-                'tipe_field' => 'date',
-            ],
-            [
-                'jenis_surat_id' => 9,
-                'nama_field' => 'NIK',
-                'tipe_field' => 'number',
-            ],
+
             [
                 'jenis_surat_id' => 9,
                 'nama_field' => 'No KK',
@@ -464,36 +337,7 @@ class FielsSuratsSeeder extends Seeder
             ],
 
             // Pemgantar Keterangan Kehilangan
-            [
-                'jenis_surat_id' => 10,
-                'nama_field' => 'Nama',
-                'tipe_field' => 'text',
-            ],
-            [
-                'jenis_surat_id' => 10,
-                'nama_field' => 'Tempat Lahir',
-                'tipe_field' => 'text',
-            ],
-            [
-                'jenis_surat_id' => 10,
-                'nama_field' => 'Tanggal Lahir',
-                'tipe_field' => 'date',
-            ],
-            [
-                'jenis_surat_id' => 10,
-                'nama_field' => 'Agama',
-                'tipe_field' => 'text',
-            ],
-            [
-                'jenis_surat_id' => 10,
-                'nama_field' => 'Alamat Lengkap',
-                'tipe_field' => 'text',
-            ],
-            [
-                'jenis_surat_id' => 10,
-                'nama_field' => 'Pekerjaan',
-                'tipe_field' => 'text',
-            ],
+
             [
                 'jenis_surat_id' => 10,
                 'nama_field' => 'Barang Yang Hilang',
@@ -507,7 +351,7 @@ class FielsSuratsSeeder extends Seeder
             [
                 'jenis_surat_id' => 10,
                 'nama_field' => 'Tanggal Hilang',
-                'tipe_field' => 'text',
+                'tipe_field' => 'date',
             ],
             [
                 'jenis_surat_id' => 10,
@@ -614,26 +458,13 @@ class FielsSuratsSeeder extends Seeder
                 'tipe_field' => 'text',
             ],
             // Pengantar SKCK
-            [
-                'jenis_surat_id' => 13,
-                'nama_field' => 'Nama Lengkap',
-                'tipe_field' => 'text',
-            ],
+
             [
                 'jenis_surat_id' => 13,
                 'nama_field' => 'Jenis Kelamin',
                 'tipe_field' => 'text',
             ],
-            [
-                'jenis_surat_id' => 13,
-                'nama_field' => 'Tempat Lahir',
-                'tipe_field' => 'text',
-            ],
-            [
-                'jenis_surat_id' => 13,
-                'nama_field' => 'Tanggal Lahir',
-                'tipe_field' => 'date',
-            ],
+
             [
                 'jenis_surat_id' => 13,
                 'nama_field' => 'Status Perkawinan',
@@ -644,26 +475,7 @@ class FielsSuratsSeeder extends Seeder
                 'nama_field' => 'Kewarganegaraan',
                 'tipe_field' => 'text',
             ],
-            [
-                'jenis_surat_id' => 13,
-                'nama_field' => 'Agama',
-                'tipe_field' => 'text',
-            ],
-            [
-                'jenis_surat_id' => 13,
-                'nama_field' => 'Pekerjaan',
-                'tipe_field' => 'text',
-            ],
-            [
-                'jenis_surat_id' => 13,
-                'nama_field' => 'NIK',
-                'tipe_field' => 'number',
-            ],
-            [
-                'jenis_surat_id' => 13,
-                'nama_field' => 'Alamat',
-                'tipe_field' => 'text',
-            ],
+
             [
                 'jenis_surat_id' => 13,
                 'nama_field' => 'Foto Pengantar RT',
