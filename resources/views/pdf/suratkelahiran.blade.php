@@ -40,11 +40,18 @@
 
     <p class="mt-8">Yang bertanda tangan di bawah ini menerangkan bahwa sesungguhnya telah lahir seorang anak :</p>
 
-    <div class="mt-10">
+    <div class="mt-7">
         <div class="flex-col">
             @foreach ($details as $detail)
-                @if (!in_array($detail['nama_field'], ['Nama Ayah', 'Nama Ibu', 'NIK Ayah', 'NIK Ibu']))
-                    <div class="flex gap-4 w-full">
+                @if (
+                    !in_array($detail['nama_field'], [
+                        'Nama Ayah',
+                        'Nama Ibu',
+                        'NIK Ayah',
+                        'NIK Ibu',
+                        'Foto Surat Keterangan Lahir dari Dokter',
+                    ]))
+                    <div class="flex w-full gap-4">
                         <p class="w-40">{{ $detail['nama_field'] }}</p>
                         <p>:</p>
                         <p>
@@ -61,13 +68,13 @@
         </div>
     </div>
 
-    <p class="mt-8">Orang tersebut adalah anak dari :</p>
+    <p class="mt-7">Orang tersebut adalah anak dari :</p>
 
-    <div class="mt-10">
+    <div class="mt-7">
         <div class="flex-col">
             @foreach ($details as $detail)
                 @if (in_array($detail['nama_field'], ['Nama Ayah', 'Nama Ibu', 'NIK Ayah', 'NIK Ibu']))
-                    <div class="flex gap-4 w-full">
+                    <div class="flex w-full gap-4">
                         <p class="w-40">{{ $detail['nama_field'] }}</p>
                         <p>:</p>
                         <p>
@@ -89,7 +96,7 @@
 
 
 
-    <x-tanda-tangan kepalaDesa="BAYU SUKMONO" />
+    <x-tanda-tangan kepalaDesa="{{ $namakades->nama_kepala_desa }}" />
 
 
     <script>

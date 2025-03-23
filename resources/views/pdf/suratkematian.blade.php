@@ -44,16 +44,16 @@
 
     <p class="mt-8">Yang bertanda tangan di bawah ini, menerangkan bahwa pada:</p>
 
-    <div class="mt-10">
+    <div class="mt-7">
         <div class="flex-col">
             @foreach ($details as $detail)
                 @if (
-                    $detail['nama_field'] === 'Nama' ||
+                    $detail['nama_field'] === 'Nama Almarhum' ||
                         $detail['nama_field'] === 'Jenis Kelamin' ||
                         $detail['nama_field'] === 'Tempat Lahir' ||
                         $detail['nama_field'] === 'Tanggal Lahir' ||
                         $detail['nama_field'] === 'Alamat')
-                    <div class="flex gap-4 w-full">
+                    <div class="flex w-full gap-4">
                         <p class="w-40">{{ $detail['nama_field'] }}</p>
                         <p>:</p>
                         <p>
@@ -74,11 +74,11 @@
     <div class="mt-10">
         @foreach ($details as $detail)
             @if (
-                $detail['nama_field'] === 'Hari' ||
+                $detail['nama_field'] === 'Hari Meninggal' ||
                     $detail['nama_field'] === 'Tanggal Meninggal' ||
                     $detail['nama_field'] === 'Tempat Meninggal' ||
                     $detail['nama_field'] === 'Penyebab Kematian')
-                <div class="flex gap-4 w-full">
+                <div class="flex w-full gap-4">
                     <p class="w-40">{{ $detail['nama_field'] }}</p>
                     <p>:</p>
                     <p>
@@ -95,7 +95,7 @@
 
     <p class="mt-8">Surat keterangan ini dibuat atas dasar yang sebenarnya.</p>
 
-    <x-tanda-tangan kepalaDesa="BAYU SUKMONO" />
+    <x-tanda-tangan class="underline" kepalaDesa="{{ $namakades->nama_kepala_desa }}" />
 
 
     <script>

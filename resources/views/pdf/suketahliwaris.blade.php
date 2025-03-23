@@ -43,30 +43,47 @@
 
     <div class="mt-4">
         <div class="flex-col">
-            @foreach ($details as $detail)
-                @if (
-                    !in_array($detail['nama_field'], [
-                        'Nama Pewaris',
-                        'Tempat Tinggal Pewaris',
-                        'Tanggal Lahir Pewaris',
-                        'Pekerjaan Pewaris',
-                        'Tempat Meninggal',
-                        'Hari Meninggal',
-                    ]))
-                    <div class="flex gap-4 w-full">
-                        <p class="w-40">{{ $detail['nama_field'] }}</p>
-                        <p>:</p>
-                        <p>
-                            @if (strtotime($detail['nilai']))
-                                <!-- Cek apakah nilai adalah tanggal -->
-                                {{ \Carbon\Carbon::parse($detail['nilai'])->translatedFormat('d F Y') }}
-                            @else
-                                {{ $detail['nilai'] }}
-                            @endif
-                        </p>
-                    </div>
-                @endif
-            @endforeach
+
+            <div class="flex w-full gap-4">
+                <p class="w-40">Nama Lengkap</p>
+                <p>:</p>
+                <p>
+                    {{ $nama }}
+                </p>
+            </div>
+
+            <div class="flex w-full gap-4">
+                <p class="w-40">Tempat / Tanggal Lahir</p>
+                <p>:</p>
+                <p>
+                    {{ $tempatlahir . ', ' . \Carbon\Carbon::parse($tgl_lahir)->translatedFormat('d F Y') }}
+                </p>
+            </div>
+
+            <div class="flex w-full gap-4">
+                <p class="w-40">NIK</p>
+                <p>:</p>
+                <p>
+                    {{ $nik }}
+                </p>
+            </div>
+
+            <div class="flex w-full gap-4">
+                <p class="w-40">Alamat</p>
+                <p>:</p>
+                <p>
+                    {{ $alamat }}
+                </p>
+            </div>
+
+            <div class="flex w-full gap-4">
+                <p class="w-40">Pekerjaan</p>
+                <p>:</p>
+                <p>
+                    {{ $pekerjaan }}
+                </p>
+            </div>
+
         </div>
     </div>
 
@@ -85,7 +102,7 @@
                         'Hari Meninggal',
                         'Tanggal Meninggal',
                     ]))
-                    <div class="flex gap-4 w-full">
+                    <div class="flex w-full gap-4">
                         <p class="w-40">{{ $detail['nama_field'] }}</p>
                         <p>:</p>
                         <p>
@@ -104,7 +121,7 @@
 
     <p class="mt-4">Yang bersangkutan telah meninggal dunia pada hari
         {{ $details->where('nama_field', 'Hari Meninggal')->first()['nilai'] }} tanggal
-        {{ $details->where('nama_field', 'Tanggal Meninggal')->first()['nilai'] }}
+        {{ \Carbon\Carbon::parse($details->where('nama_field', 'Tanggal Meninggal')->first()['nilai'])->translatedFormat('d F Y') }}
     </p>
 
 
@@ -113,7 +130,7 @@
 
 
 
-    <x-tanda-tangan kepalaDesa="BAYU SUKMONO" />
+    <x-tanda-tangan kepalaDesa="{{ $namakades->nama_kepala_desa }}" />
 
 
     <script>

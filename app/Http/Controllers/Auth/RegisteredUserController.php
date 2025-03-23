@@ -58,6 +58,8 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'nik' => ['nullable', 'regex:/^\d{16}$/'], // Validasi NIK harus 16 digit angka
             'nomor_hp' => ['nullable'],
+            'agama' => ['nullable', 'string', 'max:255'],
+            'pekerjaan' => ['nullable', 'string', 'max:255'],
             'tempat_lahir' => ['required', 'string', 'max:255'],
             'tgl_lahir' => ['nullable', 'date'],
             'alamat_utama' => ['nullable', 'string', 'max:255'],
@@ -88,6 +90,8 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'nik' => $request->nik,
             'nomor_hp' => $request->nomor_hp,
+            'agama' => $request->agama,
+            'pekerjaan' => $request->pekerjaan,
             'tempat_lahir' => $request->tempat_lahir,
             'tgl_lahir' => $request->tgl_lahir,
             'alamat_utama' => $request->alamat_utama,

@@ -26,6 +26,8 @@ class User extends Authenticatable
         'foto_kk',
         'nik',
         'nomor_hp',
+        'agama',
+        'pekerjaan',
         'alamat_utama',
         'alamat_kedua',
         'tempat_lahir',

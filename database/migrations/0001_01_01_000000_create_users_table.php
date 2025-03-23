@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('alamat_utama')->nullable();
             $table->string('alamat_kedua')->nullable();
             $table->string('nomor_hp')->nullable();
+            $table->string('agama')->nullable();
+            $table->string('pekerjaan')->nullable();
             $table->string('tempat_lahir')->nullable();
             $table->date('tgl_lahir')->nullable();
             $table->enum('role', ['User', 'Admin'])->default('User');

@@ -44,6 +44,8 @@ class ProfileController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255'],
             'nik' => ['nullable', 'regex:/^\d{16}$/'], // Validasi NIK harus 16 digit angka
             'nomor_hp' => ['nullable'],
+            'agama' => ['nullable', 'string', 'max:255'],
+            'pekerjaan' => ['nullable', 'string', 'max:255'],
             'tempat_lahir' => ['required', 'string', 'max:255'],
             'tgl_lahir' => ['nullable', 'date'],
             'alamat_utama' => ['nullable', 'string', 'max:255'],
@@ -57,6 +59,8 @@ class ProfileController extends Controller
         $user->email = $request['email'];
         $user->nik = $request['nik'];
         $user->nomor_hp = $request['nomor_hp'];
+        $user->agama = $request['agama'];
+        $user->pekerjaan = $request['pekerjaan'];
         $user->tempat_lahir = $request['tempat_lahir'];
         $user->tgl_lahir = $request['tgl_lahir'];
         $user->alamat_utama = $request['alamat_utama'];
